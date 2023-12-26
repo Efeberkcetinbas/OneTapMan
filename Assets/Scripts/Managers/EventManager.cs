@@ -4,12 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum GameEvent
 {
-    //Player
-    OnTargetHit,
+    //Shopping
+    OnShopOpen,
+    OnShopClose,
 
+    //Level Properties
+    OnUIRequirementUpdate,
 
     //Game Management
     OnIncreaseScore,
+    OnDecreaseScore,
+    OnSuccess,
+    OnOpenSuccess,
     OnUIUpdate,
     OnUIGameOver,
     OnNextLevel,

@@ -8,41 +8,57 @@ public class LevelManager : MonoBehaviour
     [Header("Indexes")]
     public int levelIndex;
     
+    public GameData gameData;
+    public LevelData levelData;
     public List<GameObject> levels;
 
-    private void Start()
+    private WaitForSeconds waitForSeconds;
+
+    private void Awake() 
     {
+        levelData.LoadData();
         LoadLevel();
+        waitForSeconds=new WaitForSeconds(.5f);
     }
+
+    
+    
+
+    
     private void LoadLevel()
     {
 
 
-        levelIndex = PlayerPrefs.GetInt("LevelNumber");
+        levelIndex = PlayerPrefs.GetInt("NumberOfLevel");
         if (levelIndex == levels.Count) levelIndex = 0;
-        PlayerPrefs.SetInt("LevelNumber", levelIndex);
+        PlayerPrefs.SetInt("NumberOfLevel", levelIndex);
        
 
         for (int i = 0; i < levels.Count; i++)
         {
             levels[i].SetActive(false);
         }
+        Debug.Log(levelIndex);
         levels[levelIndex].SetActive(true);
     }
 
     public void LoadNextLevel()
     {
-        PlayerPrefs.SetInt("LevelNumber", levelIndex + 1);
-        PlayerPrefs.SetInt("RealLevel", PlayerPrefs.GetInt("RealLevel", 0) + 1);
-        EventManager.Broadcast(GameEvent.OnNextLevel);
+        PlayerPrefs.SetInt("NumberOfLevel", levelIndex + 1);
+        PlayerPrefs.SetInt("RealNumberLevel", PlayerPrefs.GetInt("RealNumberLevel", 0) + 1);
+        levelData.IndexOfLevel++;
         LoadLevel();
+        EventManager.Broadcast(GameEvent.OnNextLevel);
+        levelData.SaveData();
     }
-
+    
     public void RestartLevel()
     {
-        LoadLevel();
+        //LoadLevel();
+        Debug.Log("RESTART LEVEL");
     }
 
+    
     
     
 }

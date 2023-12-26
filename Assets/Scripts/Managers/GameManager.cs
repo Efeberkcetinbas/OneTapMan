@@ -5,69 +5,104 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Scriptable Data's")]
     public GameData gameData;
     public PlayerData playerData;
 
-    [SerializeField] private GameObject FailPanel;
+    [Header("Player")]
+    [SerializeField] private Transform player;
+    //Level Progress
+
+   
+    public GameObject failPanel;
     [SerializeField] private Ease ease;
 
-    public float InitialDifficultyValue;
 
+    [Header("Open/Close")]
+    [SerializeField] private GameObject[] open_close;
+    
+    //Boss Ball
+
+    private WaitForSeconds waitForSeconds;
+
+    
 
     private void Awake() 
     {
         ClearData();
     }
 
-    
+    private void Start() 
+    {
+        waitForSeconds=new WaitForSeconds(1);
+        UpdateRequirement();
+    }
+
 
     private void OnEnable()
     {
-        EventManager.AddHandler(GameEvent.OnIncreaseScore, OnIncreaseScore);
+        EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
+
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveHandler(GameEvent.OnIncreaseScore, OnIncreaseScore);
+        EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
+
+    }
+
+   
+    private void UpdateRequirement()
+    {
+        //FindObjectOfType
+        gameData.tempMove=0;
+        gameData.ReqMove=FindObjectOfType<LevelRequirement>().MoveNumber;
+        EventManager.Broadcast(GameEvent.OnUIRequirementUpdate);
+    }
+
+    private void OnSuccess()
+    {
+        StartCoroutine(OpenSuccessPanel());
+    }
+
+    private IEnumerator OpenSuccessPanel()
+    {
+        yield return waitForSeconds;
+        EventManager.Broadcast(GameEvent.OnOpenSuccess);
     }
     
-    void OnGameOver()
-    {
-        FailPanel.SetActive(true);
-        FailPanel.transform.DOScale(Vector3.one,1f).SetEase(ease);
-        playerData.playerCanMove=false;
-        gameData.isGameEnd=true;
 
+
+    private void OnNextLevel()
+    {
+        ClearData();
+        UpdateRequirement();
+    }
+
+    private void OnRestartLevel()
+    {
+        UpdateRequirement();
     }
     
-
-    void OnIncreaseScore()
-    {
-        //gameData.score += 50;
-        DOTween.To(GetScore,ChangeScore,gameData.score+gameData.increaseScore,1f).OnUpdate(UpdateUI);
-    }
-
-    private int GetScore()
-    {
-        return gameData.score;
-    }
-
-    private void ChangeScore(int value)
-    {
-        gameData.score=value;
-    }
-
-    private void UpdateUI()
-    {
-        EventManager.Broadcast(GameEvent.OnUIUpdate);
-    }
-
-    
-
     
     void ClearData()
     {
+        gameData.isGameEnd=true;
+        playerData.playerCanMove=true;
+        failPanel.SetActive(false);
+        
+    }
 
+
+    public void OpenClose(GameObject[] gameObjects,bool canOpen)
+    {
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            if(canOpen)
+                gameObjects[i].SetActive(true);
+            else
+                gameObjects[i].SetActive(false);
+        }
     }
 
     
