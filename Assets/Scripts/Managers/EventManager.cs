@@ -8,6 +8,10 @@ public enum GameEvent
     OnShopOpen,
     OnShopClose,
 
+    //Time
+    OnStartTimer,
+    OnStopTimer,
+
     //Level Properties
     OnUIRequirementUpdate,
 

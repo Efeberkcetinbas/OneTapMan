@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     public PlayerData playerData;
     public LevelData levelData;
 
-
+    
 
     private void OnEnable()
     {
@@ -50,6 +50,8 @@ public class UIManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
         
     }
+    
+    
 
     private void Start() 
     {

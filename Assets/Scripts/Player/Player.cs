@@ -4,15 +4,38 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    [SerializeField] private GameData gameData;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(!gameData.isGameEnd)
+            CheckStartStop();
+    }
+
+    private void CheckStartStop()
+    {
+        if(Input.touchCount>0)
+        {
+            Touch touch=Input.GetTouch(0);
+            if(touch.phase==TouchPhase.Began)
+            {
+                gameData.isStartTimer=!gameData.isStartTimer;
+                SendStartStop();
+            }
+            
+        }
+    }
+
+    private void SendStartStop()
+    {
+        if(gameData.isStartTimer)
+            EventManager.Broadcast(GameEvent.OnStartTimer);
+        else
+            EventManager.Broadcast(GameEvent.OnStopTimer);
     }
 }

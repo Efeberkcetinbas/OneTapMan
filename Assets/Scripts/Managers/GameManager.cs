@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
         ClearData();
     }
 
+    
+
     private void Start() 
     {
         waitForSeconds=new WaitForSeconds(1);

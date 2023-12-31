@@ -12,5 +12,8 @@ public class GameData : ScriptableObject
     public int tempMove;
     public int ReqMove;
 
+    public float Timer;
+
     public bool isGameEnd=false;
+    public bool isStartTimer=false;
 }
