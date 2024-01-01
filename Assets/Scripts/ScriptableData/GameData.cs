@@ -11,6 +11,7 @@ public class GameData : ScriptableObject
     public int increaseScore;
     public int tempMove;
     public int ReqMove;
+    public int RoundedTime;
 
     public float Timer;
 

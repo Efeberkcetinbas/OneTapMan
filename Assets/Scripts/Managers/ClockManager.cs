@@ -41,8 +41,8 @@ public class ClockManager : MonoBehaviour
             if(cTime<=gameData.Timer)
             {
                 cTime+=Time.deltaTime*multiply;
-                int roundedTime=Mathf.RoundToInt(cTime);
-                timerText.SetText(roundedTime.ToString());
+                gameData.RoundedTime=Mathf.RoundToInt(cTime);
+                timerText.SetText(gameData.RoundedTime.ToString());
             }
             else
             {
@@ -102,5 +102,6 @@ public class ClockManager : MonoBehaviour
     private void OnStopTimer()
     {
         isStop=true;
+        Debug.Log("BIZ POLAT ALEMDARI MI DURDURUCAZ EFENDIM");
     }
 }
