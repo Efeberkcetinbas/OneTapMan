@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     }
 
     
-
+    
     private void Start() 
     {
         waitForSeconds=new WaitForSeconds(1);

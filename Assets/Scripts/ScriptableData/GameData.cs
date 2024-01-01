@@ -16,4 +16,6 @@ public class GameData : ScriptableObject
 
     public bool isGameEnd=false;
     public bool isStartTimer=false;
+
+    public TimerTypes timerTypes;
 }

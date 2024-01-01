@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameData gameData;
     void Start()
     {
-        
+        gameData.isStartTimer=true;
     }
 
     void Update()
