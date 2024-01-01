@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class OneNumber : MonoBehaviour, INumber
+public class BetweenNumbers : MonoBehaviour,INumber
 {
     [SerializeField] private TextMeshPro numberText;
 
-    [SerializeField] private int number;
+    [SerializeField] private int leftNumber,rightNumber;
 
     [SerializeField] private GameData gameData;
 
@@ -29,10 +29,11 @@ public class OneNumber : MonoBehaviour, INumber
     }
     public void OnStopTimer()
     {
-        if(number==gameData.RoundedTime)
+        if(leftNumber<gameData.RoundedTime && gameData.RoundedTime<rightNumber)
         {
             Debug.Log("POINT AND EXECUTED");
             Destroy(gameObject);
+
         }
         else
             return;
@@ -40,8 +41,6 @@ public class OneNumber : MonoBehaviour, INumber
 
     public void OnUpdateNumber()
     {
-        numberText.SetText(number.ToString());
+        numberText.SetText(" > " + leftNumber.ToString() + " < " + rightNumber.ToString());
     }
-
-    
 }

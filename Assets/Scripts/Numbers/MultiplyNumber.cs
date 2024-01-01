@@ -32,6 +32,7 @@ public class MultiplyNumber : MonoBehaviour,INumber
         if(gameData.RoundedTime%number==0)
         {
             Debug.Log("MULTIPLYYY");
+            Destroy(gameObject);
         }
         else
             return;
@@ -39,7 +40,7 @@ public class MultiplyNumber : MonoBehaviour,INumber
 
     public void OnUpdateNumber()
     {
-        numberText.SetText(number.ToString());
+        numberText.SetText(" x " + number.ToString());
     }
 
     

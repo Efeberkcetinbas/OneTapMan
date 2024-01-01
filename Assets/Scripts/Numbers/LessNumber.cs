@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class OneNumber : MonoBehaviour, INumber
+public class LessNumber : MonoBehaviour,INumber
 {
     [SerializeField] private TextMeshPro numberText;
 
@@ -29,7 +29,7 @@ public class OneNumber : MonoBehaviour, INumber
     }
     public void OnStopTimer()
     {
-        if(number==gameData.RoundedTime)
+        if(number>gameData.RoundedTime)
         {
             Debug.Log("POINT AND EXECUTED");
             Destroy(gameObject);
@@ -40,8 +40,6 @@ public class OneNumber : MonoBehaviour, INumber
 
     public void OnUpdateNumber()
     {
-        numberText.SetText(number.ToString());
+        numberText.SetText("< " + number.ToString());
     }
-
-    
 }
