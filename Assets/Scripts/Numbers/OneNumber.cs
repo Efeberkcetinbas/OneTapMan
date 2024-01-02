@@ -31,6 +31,7 @@ public class OneNumber : MonoBehaviour, INumber
     {
         if(number==gameData.RoundedTime)
         {
+            EventManager.Broadcast(GameEvent.OnHitNumber);
             Debug.Log("POINT AND EXECUTED");
             Destroy(gameObject);
         }

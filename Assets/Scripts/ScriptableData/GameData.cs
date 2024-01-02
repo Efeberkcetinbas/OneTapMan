@@ -9,8 +9,8 @@ public class GameData : ScriptableObject
 
     public int score;
     public int increaseScore;
-    public int tempMove;
     public int ReqMove;
+    public int NeededNumber;
     public int RoundedTime;
 
     public float Timer;

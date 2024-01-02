@@ -31,6 +31,7 @@ public class BetweenNumbers : MonoBehaviour,INumber
     {
         if(leftNumber<gameData.RoundedTime && gameData.RoundedTime<rightNumber)
         {
+            EventManager.Broadcast(GameEvent.OnHitNumber);
             Debug.Log("POINT AND EXECUTED");
             Destroy(gameObject);
 

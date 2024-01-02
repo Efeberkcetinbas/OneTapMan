@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private WaitForSeconds waitForSeconds;
 
-    
+    private int hitNumber;
 
     private void Awake() 
     {
@@ -44,12 +44,16 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
+        EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.AddHandler(GameEvent.OnHitNumber,OnHitNumber);
 
     }
 
     private void OnDisable()
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
+        EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.RemoveHandler(GameEvent.OnHitNumber,OnHitNumber);
 
     }
 
@@ -57,9 +61,41 @@ public class GameManager : MonoBehaviour
     private void UpdateRequirement()
     {
         //FindObjectOfType
-        gameData.tempMove=0;
         gameData.ReqMove=FindObjectOfType<LevelRequirement>().MoveNumber;
+        gameData.NeededNumber=FindObjectOfType<LevelNeededCube>().NeededNumber;
         EventManager.Broadcast(GameEvent.OnUIRequirementUpdate);
+    }
+
+    private void OnStopTimer()
+    {
+        //gameData.ReqMove
+        gameData.ReqMove--;
+        EventManager.Broadcast(GameEvent.OnUIRequirementUpdate);
+
+        if(gameData.ReqMove>0)
+            return;
+        else
+            StartCoroutine(CheckIfGameEnds());
+    }
+
+    private void OnHitNumber()
+    {
+        hitNumber++;
+        if(hitNumber==gameData.NeededNumber)
+            Debug.Log("SUCCESS");
+        else
+            return;
+    }
+
+    private IEnumerator CheckIfGameEnds()
+    {
+        yield return waitForSeconds;
+        gameData.isGameEnd=true;
+        Debug.Log("HERE CHECK IF GAME END");
+        if(hitNumber==gameData.NeededNumber)
+            Debug.Log("SUCCESS");
+        else
+            Debug.Log("FAIL");
     }
 
     private void OnSuccess()
@@ -91,7 +127,9 @@ public class GameManager : MonoBehaviour
     {
         gameData.isGameEnd=true;
         playerData.playerCanMove=true;
-        failPanel.SetActive(false);
+        //failPanel.SetActive(false);
+
+        hitNumber=0;
         
     }
 

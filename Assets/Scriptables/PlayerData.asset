@@ -9,15 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e14db6eb11dc14d4a9aadc380891c5fd, type: 3}
-  m_Name: GameData
+  m_Script: {fileID: 11500000, guid: 7aedcb3c37d150841933ab8860006f66, type: 3}
+  m_Name: PlayerData
   m_EditorClassIdentifier: 
-  score: 0
-  increaseScore: 0
-  ReqMove: 6
-  NeededNumber: 4
-  RoundedTime: 56
-  Timer: 100
-  isGameEnd: 0
-  isStartTimer: 0
-  timerTypes: 1
+  playerCanMove: 1

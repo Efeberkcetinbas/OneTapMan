@@ -7,6 +7,12 @@ public enum GameEvent
     //Shopping
     OnShopOpen,
     OnShopClose,
+    
+    
+    //Numbers
+    OnHitNumber,
+
+
 
     //Time
     OnStartTimer,

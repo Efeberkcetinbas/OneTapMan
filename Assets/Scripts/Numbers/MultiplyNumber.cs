@@ -31,6 +31,7 @@ public class MultiplyNumber : MonoBehaviour,INumber
     {
         if(gameData.RoundedTime%number==0)
         {
+            EventManager.Broadcast(GameEvent.OnHitNumber);
             Debug.Log("MULTIPLYYY");
             Destroy(gameObject);
         }

@@ -57,7 +57,8 @@ public class UIManager : MonoBehaviour
     {
         waitForSeconds=new WaitForSeconds(.5f);
         waitForFill=new WaitForSeconds(.5f);
-        OnNextLevel();
+        //OnNextLevel();
+        
     }
     
     private void OnUIUpdate()
@@ -79,7 +80,7 @@ public class UIManager : MonoBehaviour
     private void OnUIRequirementUpdate()
     {
         //RequirementNumber
-        MoveText.SetText(gameData.tempMove + " / " + gameData.ReqMove);
+        MoveText.SetText(gameData.ReqMove.ToString());
     }
 
     private void OnOpenSuccess()
