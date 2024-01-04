@@ -9,14 +9,6 @@ public class GameManager : MonoBehaviour
     public GameData gameData;
     public PlayerData playerData;
 
-    [Header("Player")]
-    [SerializeField] private Transform player;
-    //Level Progress
-
-   
-    public GameObject failPanel;
-    [SerializeField] private Ease ease;
-
 
     [Header("Open/Close")]
     [SerializeField] private GameObject[] open_close;
@@ -46,6 +38,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
         EventManager.AddHandler(GameEvent.OnHitNumber,OnHitNumber);
+        EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
 
     }
 
@@ -54,6 +47,7 @@ public class GameManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
         EventManager.RemoveHandler(GameEvent.OnHitNumber,OnHitNumber);
+        EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
 
     }
 
@@ -82,7 +76,8 @@ public class GameManager : MonoBehaviour
     {
         hitNumber++;
         if(hitNumber==gameData.NeededNumber)
-            Debug.Log("SUCCESS");
+            EventManager.Broadcast(GameEvent.OnSuccess);
+            //Debug.Log("SUCCESS");
         else
             return;
     }
@@ -93,13 +88,15 @@ public class GameManager : MonoBehaviour
         gameData.isGameEnd=true;
         Debug.Log("HERE CHECK IF GAME END");
         if(hitNumber==gameData.NeededNumber)
-            Debug.Log("SUCCESS");
+            EventManager.Broadcast(GameEvent.OnSuccess);
+//            Debug.Log("SUCCESS");
         else
             Debug.Log("FAIL");
     }
 
     private void OnSuccess()
     {
+        gameData.isGameEnd=true;
         StartCoroutine(OpenSuccessPanel());
     }
 

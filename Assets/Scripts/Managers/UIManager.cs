@@ -12,7 +12,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI failScore;
     [SerializeField] private TextMeshProUGUI successScore;
     [SerializeField] private TextMeshProUGUI shoppingScore;
-    [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI MoveText;
     [SerializeField] private TextMeshProUGUI StartStopText;
@@ -62,15 +61,15 @@ public class UIManager : MonoBehaviour
     {
         waitForSeconds=new WaitForSeconds(.5f);
         waitForFill=new WaitForSeconds(.5f);
-        //OnNextLevel();
-        
+        OnNextLevel();
+        OnUIUpdate();
+    
     }
     
     private void OnUIUpdate()
     {
         score.SetText(levelData.score.ToString());
         score.transform.DOScale(new Vector3(1.5f,1.5f,1.5f),0.2f).OnComplete(()=>score.transform.DOScale(new Vector3(1,1f,1f),0.2f));
-        levelData.SaveData();
     }
 
     private void OnNextLevel()
@@ -98,7 +97,7 @@ public class UIManager : MonoBehaviour
 
     private void OnOpenSuccess()
     {
-        successScore.SetText("+ " +  (levelData.score+gameData.increaseScore).ToString());
+        //successScore.SetText("+ " +  (levelData.score+gameData.increaseScore).ToString());
     }
 
     private void OnShopBallSelected()

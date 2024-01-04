@@ -37,25 +37,31 @@ public class DestroyNumber : MonoBehaviour
     private void MagicDestruction()
     {
         Debug.Log("MAGIC");
-        Destroy(gameObject);
+        Destruction();
     }
 
     private void BlackHoleDestruction()
     {
         Debug.Log("BLACKHOLE");
-        Destroy(gameObject);
+        Destruction();
     }
 
     private void GojoDestruction()
     {
         Debug.Log("GOJO");
-        Destroy(gameObject);
+        Destruction();
     }
 
     private void SukunaDestruction()
     {
         Debug.Log("SUKUNA");
-        Destroy(gameObject);
+        Destruction();
+    }
+
+    private void Destruction()
+    {
+        EventManager.Broadcast(GameEvent.OnIncreaseScore);
+        gameObject.SetActive(false);
     }
     
 }

@@ -7,7 +7,6 @@ using Cinemachine;
 public class CameraManager : MonoBehaviour
 {
     public CinemachineVirtualCamera cm;
-    public CinemachineVirtualCamera cm2;
 
     [Header("Shake Control")]
     [SerializeField] private float shakeTime = 0.5f;
@@ -17,17 +16,21 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float oldFieldOfView;
     private CinemachineBasicMultiChannelPerlin noise;
 
-    private bool isFirstCam=true;
     
 
     private void OnEnable() 
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
+        EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.AddHandler(GameEvent.OnHitNumber,OnHitNumber);
+
     }
 
     private void OnDisable() 
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
+        EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.RemoveHandler(GameEvent.OnHitNumber,OnHitNumber);
     }
 
    
@@ -46,15 +49,20 @@ public class CameraManager : MonoBehaviour
     private void OnNextLevel()
     {
         ChangeFieldOfView(oldFieldOfView,2);
-        isFirstCam=true;
     }
 
 
-    private void OnSuccess()
+   
+
+    private void OnStopTimer()
     {
-        ChangeFieldOfView(newFieldOfView,2);
+        ChangeFieldOfViewHit(newFieldOfView,oldFieldOfView,.25f);
     }
 
+    private void OnHitNumber()
+    {
+        Noise(amplitudeGain,frequencyGain,shakeTime);
+    }
    
     
 

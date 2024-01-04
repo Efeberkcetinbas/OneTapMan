@@ -1,0 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using DG.Tweening;
+
+public class Openings : MonoBehaviour
+{
+    [SerializeField] private List<GameObject> cubes=new List<GameObject>();
+
+    [SerializeField] private Ease ease;
+
+    [SerializeField] private float duration;
+
+    private WaitForSeconds waitForSeconds;
+
+    private void Start()
+    {
+        waitForSeconds=new WaitForSeconds(.2f);
+    }
+
+    private void OnEnable()
+    {
+        EventManager.AddHandler(GameEvent.OnStartGame,OnStartGame);
+
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveHandler(GameEvent.OnStartGame,OnStartGame);
+
+    }
+    private void OnStartGame()
+    {
+        StartCoroutine(StartCubes());
+    }
+
+    private IEnumerator StartCubes()
+    {
+        for (int i = 0; i < cubes.Count; i++)
+        {
+            cubes[i].SetActive(true);
+            cubes[i].transform.localScale=Vector3.zero;
+            cubes[i].transform.DOScale(Vector3.one,0.1f);
+            yield return waitForSeconds;
+
+        }
+    }
+}

@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using DG.Tweening;
 public class PanelManager : MonoBehaviour
 {
-    [SerializeField] private RectTransform StartPanel,StorePanel,SuccessPanel,FailPanel,ScoreImage;
+    [SerializeField] private RectTransform StartPanel,CharacterPanel,DestructionPanel,SuccessPanel,FailPanel,ScoreImage;
 
     [SerializeField] private GameObject[] sceneUI;
     [SerializeField] private Image Fade;
 
-    [SerializeField] private float StartX,StartY,StoreX,StoreY,ScoreX,ScoreOldX,duration;
+    [SerializeField] private float StartX,StartY,CharacterX,CharacterY,DestructionX,DestructionY,ScoreX,ScoreOldX,duration;
 
     [SerializeField] private GameData gameData;
     [SerializeField] private PlayerData playerData;
@@ -29,7 +29,6 @@ public class PanelManager : MonoBehaviour
     private void OnEnable() 
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
-        EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.AddHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
 
     }
@@ -38,7 +37,6 @@ public class PanelManager : MonoBehaviour
     private void OnDisable() 
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
-        EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.RemoveHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
     }
 
@@ -51,9 +49,7 @@ public class PanelManager : MonoBehaviour
         waitForSecondsScore=new WaitForSeconds(2);
     }
 
-    private void OnSuccess()
-    {
-    }
+    
 
     
 
@@ -64,11 +60,11 @@ public class PanelManager : MonoBehaviour
         //EventManager.Broadcast(GameEvent.OnButtonClicked);
         StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>{
             SceneUI(true);
-            ScoreImage.DOAnchorPosX(ScoreOldX,0.5f);
-            StartCoroutine(ScoreMove());
+            /*ScoreImage.DOAnchorPosX(ScoreOldX,0.5f);
+            StartCoroutine(ScoreMove());*/
             //player.transform.DOMoveY(0.5f,0.5f).OnComplete(()=>playerData.playerCanMove=true);
+            EventManager.Broadcast(GameEvent.OnStartGame);
             gameData.isGameEnd=false;
-            
            
 
             //StartPanel.gameObject.SetActive(false);
@@ -110,7 +106,7 @@ public class PanelManager : MonoBehaviour
         
         StartPanel.gameObject.SetActive(true);
         StartPanel.transform.localScale=Vector3.one;
-        StartPanel.DOAnchorPos(Vector2.zero,0.1f).OnComplete(()=>EventManager.Broadcast(GameEvent.OnIncreaseScore));
+        StartPanel.DOAnchorPos(Vector2.zero,0.1f);
 
         StartCoroutine(Blink(Fade.gameObject,Fade));
         for (int i = 0; i < sceneUI.Length; i++)
@@ -185,12 +181,20 @@ public class PanelManager : MonoBehaviour
 
   
 
-    public void OpenStorePanel()
+    public void OpenCharacterPanel()
     {
         StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>StartPanel.gameObject.SetActive(false));
-        StorePanel.gameObject.SetActive(true);
-        StorePanel.DOAnchorPos(new Vector2(0,750),duration);
-        EventManager.Broadcast(GameEvent.OnShopOpen);
+        CharacterPanel.gameObject.SetActive(true);
+        CharacterPanel.DOAnchorPos(new Vector2(0,750),duration);
+        //EventManager.Broadcast(GameEvent.OnShopOpen);
+    }
+
+    public void OpenDestructionPanel()
+    {
+        StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>StartPanel.gameObject.SetActive(false));
+        DestructionPanel.gameObject.SetActive(true);
+        DestructionPanel.DOAnchorPos(new Vector2(0,750),duration);
+        //EventManager.Broadcast(GameEvent.OnShopOpen);
     }
 
     public void BackToStart()
@@ -198,7 +202,7 @@ public class PanelManager : MonoBehaviour
 
         StartPanel.gameObject.SetActive(true);
         StartPanel.DOAnchorPos(Vector2.zero,duration);
-        StorePanel.DOAnchorPos(new Vector2(StoreX,StoreY),duration);
+        CharacterPanel.DOAnchorPos(new Vector2(CharacterX,CharacterY),duration);
         EventManager.Broadcast(GameEvent.OnShopClose);
 
 

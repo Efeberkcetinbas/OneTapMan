@@ -33,7 +33,7 @@ public enum GameEvent
     OnSuccess,
     OnOpenSuccess,
     OnUIUpdate,
-    OnUIGameOver,
+    OnStartGame,
     OnNextLevel,
     OnGameOver
 }
