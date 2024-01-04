@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private WaitForSeconds waitForSeconds;
 
-    private int hitNumber;
+    [SerializeField]private int hitNumber;
 
     private void Awake() 
     {

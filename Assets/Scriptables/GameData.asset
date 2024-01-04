@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   increaseScore: 0
-  ReqMove: 6
-  NeededNumber: 4
-  RoundedTime: 56
+  ReqMove: 238
+  NeededNumber: 3
+  RoundedTime: 55
   Timer: 100
   isGameEnd: 0
   isStartTimer: 0

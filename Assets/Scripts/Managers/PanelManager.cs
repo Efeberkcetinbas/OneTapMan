@@ -8,9 +8,7 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private RectTransform StartPanel,StorePanel,SuccessPanel,FailPanel,ScoreImage;
 
     [SerializeField] private GameObject[] sceneUI;
-    [SerializeField] private GameObject directionText;
     [SerializeField] private Image Fade;
-    [SerializeField] private Image Light;
 
     [SerializeField] private float StartX,StartY,StoreX,StoreY,ScoreX,ScoreOldX,duration;
 
@@ -26,7 +24,6 @@ public class PanelManager : MonoBehaviour
     private WaitForSeconds waitForSeconds2;
     private WaitForSeconds waitForSecondsScore;
 
-    [SerializeField] private Player player;
 
 
     private void OnEnable() 
@@ -47,7 +44,6 @@ public class PanelManager : MonoBehaviour
 
     private void Start() 
     {
-        //UICanvas.SetActive(false);
         SceneUI(false);
 
         waitForSeconds1=new WaitForSeconds(2);

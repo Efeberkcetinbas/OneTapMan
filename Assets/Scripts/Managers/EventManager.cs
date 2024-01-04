@@ -12,6 +12,12 @@ public enum GameEvent
     //Numbers
     OnHitNumber,
 
+    //DestroyTypes
+    OnMagicDestroy,
+    OnBlackHoleDestroy,
+    OnGojoDestroy,
+    OnSukunaDestoy,
+
 
 
     //Time

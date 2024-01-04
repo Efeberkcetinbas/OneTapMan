@@ -11,11 +11,12 @@ public class MultiplyNumber : MonoBehaviour,INumber
 
     [SerializeField] private GameData gameData;
 
-    
+    private DestroyNumber destroyNumber;
 
     private void Start()
     {
         OnUpdateNumber();
+        destroyNumber=GetComponent<DestroyNumber>();
     }
 
     private void OnEnable()
@@ -33,7 +34,7 @@ public class MultiplyNumber : MonoBehaviour,INumber
         {
             EventManager.Broadcast(GameEvent.OnHitNumber);
             Debug.Log("MULTIPLYYY");
-            Destroy(gameObject);
+            destroyNumber.MakeDestruction();
         }
         else
             return;
