@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 3631387089801960750}
   - component: {fileID: 3631387089801960745}
   - component: {fileID: 3631387089801960744}
+  - component: {fileID: 1678339292}
   m_Layer: 0
   m_Name: MultiplyNumber
   m_TagString: Untagged
@@ -272,3 +273,16 @@ MonoBehaviour:
   numberText: {fileID: 3631387089049212879}
   number: 2
   gameData: {fileID: 11400000, guid: c79bc842d854c2847b9735fa4a72e99d, type: 2}
+--- !u!114 &1678339292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3631387089801960747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db1d3e0a65b1824b9b37f10bacfa656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelData: {fileID: 11400000, guid: 9de1cb1c39157c64eb5e104112e1d618, type: 2}
