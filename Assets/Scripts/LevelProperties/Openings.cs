@@ -16,6 +16,10 @@ public class Openings : MonoBehaviour
     private void Start()
     {
         waitForSeconds=new WaitForSeconds(.2f);
+        for (int i = 0; i < cubes.Count; i++)
+        {
+            cubes[i].SetActive(false);
+        }
     }
 
     private void OnEnable()
@@ -40,7 +44,7 @@ public class Openings : MonoBehaviour
         {
             cubes[i].SetActive(true);
             cubes[i].transform.localScale=Vector3.zero;
-            cubes[i].transform.DOScale(Vector3.one,0.1f);
+            cubes[i].transform.DOScale(Vector3.one,duration);
             yield return waitForSeconds;
 
         }

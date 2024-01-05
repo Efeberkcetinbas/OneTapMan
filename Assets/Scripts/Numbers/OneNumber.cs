@@ -12,6 +12,7 @@ public class OneNumber : MonoBehaviour, INumber
     [SerializeField] private GameData gameData;
 
     private DestroyNumber destroyNumber;
+    [SerializeField] private Transform fromTarget;
     
 
     private void Start()
@@ -33,8 +34,9 @@ public class OneNumber : MonoBehaviour, INumber
     {
         if(number==gameData.RoundedTime)
         {
-            EventManager.Broadcast(GameEvent.OnHitNumber);
+            EventManager.Broadcast(GameEvent.OnMatchNumber);
             Debug.Log("POINT AND EXECUTED");
+            destroyNumber.CreateDestructionObject(fromTarget,transform);
             destroyNumber.MakeDestruction();
         }
         else

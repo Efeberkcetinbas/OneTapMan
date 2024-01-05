@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
-        EventManager.AddHandler(GameEvent.OnHitNumber,OnHitNumber);
+        EventManager.AddHandler(GameEvent.OnMatchNumber,OnMatchNumber);
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
 
     }
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
-        EventManager.RemoveHandler(GameEvent.OnHitNumber,OnHitNumber);
+        EventManager.RemoveHandler(GameEvent.OnMatchNumber,OnMatchNumber);
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
 
     }
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(CheckIfGameEnds());
     }
 
-    private void OnHitNumber()
+    private void OnMatchNumber()
     {
         hitNumber++;
         if(hitNumber==gameData.NeededNumber)

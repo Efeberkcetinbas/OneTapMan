@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 
 public enum DestroyTypes
 {
+    OnePunch,
     Magic,
     BlackHole,
     Gojo,
@@ -13,25 +14,37 @@ public enum DestroyTypes
 public class DestroyNumber : MonoBehaviour
 {   
     [SerializeField] private LevelData levelData;
+    [SerializeField] private GameObject destructionObject;
     internal void MakeDestruction()
     {
         switch(levelData.destroyTypes)
         {
+            case DestroyTypes.OnePunch:
+                //EventManager.Broadcast(GameEvent.OnMagicDestroy)
+                //PunchDestruction();
+                break;
+
             case DestroyTypes.Magic:
                 //EventManager.Broadcast(GameEvent.OnMagicDestroy)
-                MagicDestruction();
+                //MagicDestruction();
                 break;
             case DestroyTypes.BlackHole:
-                BlackHoleDestruction();
+                //BlackHoleDestruction();
                 break;
             case DestroyTypes.Gojo:
-                GojoDestruction();
+                //GojoDestruction();
                 break;
             case DestroyTypes.Sukuna:
-                SukunaDestruction();
+                //SukunaDestruction();
                 break;
 
         }
+    }
+
+    private void PunchDestruction()
+    {
+        Debug.Log("PUNCH");
+        Destruction();
     }
 
     private void MagicDestruction()
@@ -62,6 +75,18 @@ public class DestroyNumber : MonoBehaviour
     {
         EventManager.Broadcast(GameEvent.OnIncreaseScore);
         gameObject.SetActive(false);
+    }
+
+    internal void CreateDestructionObject(Transform fromPos,Transform targetPos)
+    {
+        GameObject destructionClone=Instantiate(destructionObject);
+        destructionClone.transform.position=fromPos.position;
+        destructionClone.transform.DOMove(targetPos.position,0.5f).OnComplete(()=>{
+            Destroy(destructionClone);
+            Destruction();
+            //Collider ile carpisma gerceklesir
+            
+        });
     }
     
 }

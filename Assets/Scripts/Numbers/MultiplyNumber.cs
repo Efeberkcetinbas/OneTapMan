@@ -12,6 +12,7 @@ public class MultiplyNumber : MonoBehaviour,INumber
     [SerializeField] private GameData gameData;
 
     private DestroyNumber destroyNumber;
+    [SerializeField] private Transform fromTarget;
 
     private void Start()
     {
@@ -32,8 +33,9 @@ public class MultiplyNumber : MonoBehaviour,INumber
     {
         if(gameData.RoundedTime%number==0)
         {
-            EventManager.Broadcast(GameEvent.OnHitNumber);
+            EventManager.Broadcast(GameEvent.OnMatchNumber);
             Debug.Log("MULTIPLYYY");
+            destroyNumber.CreateDestructionObject(fromTarget,transform);
             destroyNumber.MakeDestruction();
         }
         else

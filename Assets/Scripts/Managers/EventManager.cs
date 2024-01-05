@@ -10,9 +10,11 @@ public enum GameEvent
     
     
     //Numbers
-    OnHitNumber,
+    OnMatchNumber,
+    OnHitNumbers,
 
     //DestroyTypes
+    OnOnePunchDestroy,
     OnMagicDestroy,
     OnBlackHoleDestroy,
     OnGojoDestroy,

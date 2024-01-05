@@ -21,16 +21,14 @@ public class CameraManager : MonoBehaviour
     private void OnEnable() 
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
-        EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
-        EventManager.AddHandler(GameEvent.OnHitNumber,OnHitNumber);
+        EventManager.AddHandler(GameEvent.OnHitNumbers,OnHitNumbers);
 
     }
 
     private void OnDisable() 
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
-        EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
-        EventManager.RemoveHandler(GameEvent.OnHitNumber,OnHitNumber);
+        EventManager.RemoveHandler(GameEvent.OnHitNumbers,OnHitNumbers);
     }
 
    
@@ -54,12 +52,9 @@ public class CameraManager : MonoBehaviour
 
    
 
-    private void OnStopTimer()
-    {
-        ChangeFieldOfViewHit(newFieldOfView,oldFieldOfView,.25f);
-    }
+    
 
-    private void OnHitNumber()
+    private void OnHitNumbers()
     {
         Noise(amplitudeGain,frequencyGain,shakeTime);
     }
