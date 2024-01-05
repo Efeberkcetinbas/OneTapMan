@@ -76,10 +76,19 @@ public class GameManager : MonoBehaviour
     {
         hitNumber++;
         if(hitNumber==gameData.NeededNumber)
-            EventManager.Broadcast(GameEvent.OnSuccess);
+        {
+            gameData.isGameEnd=true;
+            StartCoroutine(StartSuccess());
+        }
             //Debug.Log("SUCCESS");
         else
             return;
+    }
+
+    private IEnumerator StartSuccess()
+    {
+        yield return waitForSeconds;
+        EventManager.Broadcast(GameEvent.OnSuccess);
     }
 
     private IEnumerator CheckIfGameEnds()

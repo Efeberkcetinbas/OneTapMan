@@ -15,6 +15,7 @@ public class DestroyNumber : MonoBehaviour
 {   
     [SerializeField] private LevelData levelData;
     [SerializeField] private GameObject destructionObject;
+    [SerializeField] private Ease ease;
     internal void MakeDestruction()
     {
         switch(levelData.destroyTypes)
@@ -79,9 +80,10 @@ public class DestroyNumber : MonoBehaviour
 
     internal void CreateDestructionObject(Transform fromPos,Transform targetPos)
     {
+        //Bu ileride yumruk degil baska sekillerde olacak
         GameObject destructionClone=Instantiate(destructionObject);
         destructionClone.transform.position=fromPos.position;
-        destructionClone.transform.DOMove(targetPos.position,0.5f).OnComplete(()=>{
+        destructionClone.transform.DOMove(targetPos.position,0.25f).SetEase(ease).OnComplete(()=>{
             Destroy(destructionClone);
             Destruction();
             //Collider ile carpisma gerceklesir
