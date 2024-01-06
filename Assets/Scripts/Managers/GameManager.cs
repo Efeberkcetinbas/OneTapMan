@@ -133,10 +133,10 @@ public class GameManager : MonoBehaviour
     {
         gameData.isGameEnd=true;
         playerData.playerCanMove=true;
-        //failPanel.SetActive(false);
+
 
         hitNumber=0;
-        
+   
     }
 
 

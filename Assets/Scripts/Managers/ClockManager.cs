@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using DG.Tweening;
 
 //Enum ile timer type yap ilk leveller basit yavasca artarken ilerki levellerde hizla arttir.
 public enum TimerTypes
@@ -102,6 +103,11 @@ public class ClockManager : MonoBehaviour
     private void OnStopTimer()
     {
         isStop=true;
-        Debug.Log("BIZ POLAT ALEMDARI MI DURDURUCAZ EFENDIM");
+        ScaleUP();
+    }
+
+    private void ScaleUP()
+    {
+        timerText.transform.DOScale(Vector3.one*1.5f,.25f).OnComplete(()=>timerText.transform.DOScale(Vector3.one,.25f));
     }
 }

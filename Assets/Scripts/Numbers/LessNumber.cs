@@ -35,15 +35,19 @@ public class LessNumber : MonoBehaviour,INumber
         {
             EventManager.Broadcast(GameEvent.OnMatchNumber);
             Debug.Log("POINT AND EXECUTED");
-            destroyNumber.CreateDestructionObject(fromTarget,transform);
-            destroyNumber.MakeDestruction();
+            destroyNumber.CreateDestructionObject(fromTarget);
         }
         else
+        {
             return;
+        }
+        
     }
 
     public void OnUpdateNumber()
     {
         numberText.SetText("< " + number.ToString());
     }
+
+    
 }

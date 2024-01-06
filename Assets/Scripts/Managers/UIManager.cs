@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI shoppingScore;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI MoveText;
-    [SerializeField] private TextMeshProUGUI StartStopText;
     
     
 
@@ -37,8 +36,6 @@ public class UIManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnUIUpdate, OnUIUpdate);
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnUIRequirementUpdate,OnUIRequirementUpdate);
-        EventManager.AddHandler(GameEvent.OnStartTimer,OnStartTimer);
-        EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
         
         EventManager.AddHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
         
@@ -48,8 +45,6 @@ public class UIManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnUIUpdate, OnUIUpdate);
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnUIRequirementUpdate,OnUIRequirementUpdate);
-        EventManager.RemoveHandler(GameEvent.OnStartTimer,OnStartTimer);
-        EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
 
         EventManager.RemoveHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
         
@@ -61,6 +56,7 @@ public class UIManager : MonoBehaviour
     {
         waitForSeconds=new WaitForSeconds(.5f);
         waitForFill=new WaitForSeconds(.5f);
+       
         OnNextLevel();
         OnUIUpdate();
     
@@ -79,15 +75,11 @@ public class UIManager : MonoBehaviour
         
     }
 
-    private void OnStartTimer()
-    {
-        StartStopText.SetText("STOP");
-    }
+    
 
-    private void OnStopTimer()
-    {
-        StartStopText.SetText("START");
-    }
+   
+
+
 
     private void OnUIRequirementUpdate()
     {

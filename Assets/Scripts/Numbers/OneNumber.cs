@@ -36,11 +36,14 @@ public class OneNumber : MonoBehaviour, INumber
         {
             EventManager.Broadcast(GameEvent.OnMatchNumber);
             Debug.Log("POINT AND EXECUTED");
-            destroyNumber.CreateDestructionObject(fromTarget,transform);
-            destroyNumber.MakeDestruction();
+            destroyNumber.CreateDestructionObject(fromTarget);
         }
         else
+        {
             return;
+        }
+
+
     }
 
     public void OnUpdateNumber()
@@ -48,5 +51,6 @@ public class OneNumber : MonoBehaviour, INumber
         numberText.SetText(number.ToString());
     }
 
+    
     
 }

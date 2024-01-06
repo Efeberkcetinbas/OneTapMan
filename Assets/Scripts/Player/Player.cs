@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField] private GameData gameData;
+
+    
     void Start()
     {
         gameData.isStartTimer=true;
@@ -16,6 +18,8 @@ public class Player : MonoBehaviour
         if(!gameData.isGameEnd)
             CheckStartStop();
     }
+
+    
 
     private void CheckStartStop()
     {
@@ -34,8 +38,15 @@ public class Player : MonoBehaviour
     private void SendStartStop()
     {
         if(gameData.isStartTimer)
+        {
             EventManager.Broadcast(GameEvent.OnStartTimer);
+        }
+            
         else
             EventManager.Broadcast(GameEvent.OnStopTimer);
     }
+
+    
+
+    
 }

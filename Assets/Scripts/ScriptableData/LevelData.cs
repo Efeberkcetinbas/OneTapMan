@@ -8,7 +8,6 @@ public class LevelData : ScriptableObject
     public int IndexOfLevel;
     public int score;
 
-    public DestroyTypes destroyTypes;
 
     public void SaveData()
     {

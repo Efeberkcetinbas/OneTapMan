@@ -35,11 +35,13 @@ public class MultiplyNumber : MonoBehaviour,INumber
         {
             EventManager.Broadcast(GameEvent.OnMatchNumber);
             Debug.Log("MULTIPLYYY");
-            destroyNumber.CreateDestructionObject(fromTarget,transform);
-            destroyNumber.MakeDestruction();
+            destroyNumber.CreateDestructionObject(fromTarget);
         }
         else
+        {
             return;
+        }
+
     }
 
     public void OnUpdateNumber()
@@ -47,5 +49,7 @@ public class MultiplyNumber : MonoBehaviour,INumber
         numberText.SetText(" x " + number.ToString());
     }
 
+
+   
     
 }

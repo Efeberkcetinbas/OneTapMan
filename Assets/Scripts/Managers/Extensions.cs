@@ -29,4 +29,11 @@ public static class Extensions
 
         }
     }
+
+    public static T GetOneValueByRandom<T>(this List<T> list)
+    {
+        int maxCount=list.Count;
+        T value=list[Random.Range(0,maxCount)];
+        return value;
+    }
 }

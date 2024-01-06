@@ -13,7 +13,7 @@ public class BetweenNumbers : MonoBehaviour,INumber
 
     private DestroyNumber destroyNumber;
 
-    [SerializeField] private Transform fromTarget;
+    [SerializeField] private Transform target;
 
     private void Start()
     {
@@ -36,16 +36,20 @@ public class BetweenNumbers : MonoBehaviour,INumber
         {
             EventManager.Broadcast(GameEvent.OnMatchNumber);
             Debug.Log("POINT AND EXECUTED");
-            destroyNumber.CreateDestructionObject(fromTarget,transform);
-            destroyNumber.MakeDestruction();
+            destroyNumber.CreateDestructionObject(target);
 
         }
         else
+        {
             return;
+        }
+
     }
 
     public void OnUpdateNumber()
     {
         numberText.SetText(leftNumber.ToString() + " - " + rightNumber.ToString());
     }
+
+    
 }
