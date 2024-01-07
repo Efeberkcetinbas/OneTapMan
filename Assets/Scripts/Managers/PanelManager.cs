@@ -185,16 +185,16 @@ public class PanelManager : MonoBehaviour
     {
         StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>StartPanel.gameObject.SetActive(false));
         CharacterPanel.gameObject.SetActive(true);
-        CharacterPanel.DOAnchorPos(new Vector2(0,750),duration);
+        CharacterPanel.DOAnchorPos(new Vector2(0,0),duration);
         EventManager.Broadcast(GameEvent.OnShopOpen);
     }
 
-    public void OpenDestructionPanel()
+    public void OpenIncrementalPanel()
     {
         StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>StartPanel.gameObject.SetActive(false));
         IncrementalPanel.gameObject.SetActive(true);
-        IncrementalPanel.DOAnchorPos(new Vector2(0,750),duration);
-        EventManager.Broadcast(GameEvent.OnShopOpen);
+        IncrementalPanel.DOAnchorPos(new Vector2(0,0),duration);
+        EventManager.Broadcast(GameEvent.OnIncrementalOpen);
     }
 
     public void BackToStart(bool isOnCharacter)
@@ -204,14 +204,14 @@ public class PanelManager : MonoBehaviour
             StartPanel.gameObject.SetActive(true);
             StartPanel.DOAnchorPos(Vector2.zero,duration);
             CharacterPanel.DOAnchorPos(new Vector2(CharacterX,CharacterY),duration);
-            EventManager.Broadcast(GameEvent.OnShopClose);
+            //EventManager.Broadcast(GameEvent.OnShopClose);
         }
         else
         {
             StartPanel.gameObject.SetActive(true);
             StartPanel.DOAnchorPos(Vector2.zero,duration);
-            CharacterPanel.DOAnchorPos(new Vector2(IncrementalX,IncrementalY),duration);
-            EventManager.Broadcast(GameEvent.OnShopClose);
+            IncrementalPanel.DOAnchorPos(new Vector2(IncrementalX,IncrementalY),duration);
+            //EventManager.Broadcast(GameEvent.OnShopClose);
         }
     }
 }

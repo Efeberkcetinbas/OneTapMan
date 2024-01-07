@@ -13,6 +13,7 @@ public enum GameEvent
     //Incrementals
     OnUpdatePressTime,
     OnUpdateIncreaseScore,
+    OnIncrementalOpen,
     
     //Numbers
     OnMatchNumber,
