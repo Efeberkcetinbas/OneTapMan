@@ -7,7 +7,12 @@ public enum GameEvent
     //Shopping
     OnShopOpen,
     OnShopClose,
-    
+    OnCharacterSelected,
+    OnCharacterChanged,
+
+    //Incrementals
+    OnUpdatePressTime,
+    OnUpdateIncreaseScore,
     
     //Numbers
     OnMatchNumber,

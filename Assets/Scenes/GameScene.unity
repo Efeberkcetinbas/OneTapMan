@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 88820858}
   - component: {fileID: 88820857}
   m_Layer: 5
-  m_Name: DestructionPanel
+  m_Name: IncrementalPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1600,7 +1600,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 23bc116911b8cf84ea296ea3534a7f11, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f0ff3f74d230e0448e9566bb08f20ca, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2476,7 +2476,7 @@ GameObject:
   - component: {fileID: 619595355}
   - component: {fileID: 619595354}
   m_Layer: 5
-  m_Name: DestructionButton
+  m_Name: IncrementalButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2636,7 +2636,6 @@ MonoBehaviour:
   shoppingScore: {fileID: 0}
   levelText: {fileID: 2073858355}
   MoveText: {fileID: 1289759251}
-  ComboText: {fileID: 1443344947}
   gameData: {fileID: 11400000, guid: c79bc842d854c2847b9735fa4a72e99d, type: 2}
   playerData: {fileID: 11400000, guid: 62ba3c06c510adc45941f1b9af9d03ae, type: 2}
   levelData: {fileID: 11400000, guid: 9de1cb1c39157c64eb5e104112e1d618, type: 2}
@@ -3250,8 +3249,9 @@ GameObject:
   - component: {fileID: 934266222}
   - component: {fileID: 934266221}
   - component: {fileID: 934266220}
+  - component: {fileID: 934266223}
   m_Layer: 5
-  m_Name: InfinityButton
+  m_Name: MoveRewardedButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3322,7 +3322,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 934266221}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 934266223}
+        m_TargetAssemblyTypeName: PlayRewarded, Assembly-CSharp
+        m_MethodName: PlayRewardedVideo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &934266221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3361,6 +3373,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934266218}
   m_CullTransparentMesh: 1
+--- !u!114 &934266223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934266218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65874295a0027774d99bd4f329cbef7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData: {fileID: 11400000, guid: c79bc842d854c2847b9735fa4a72e99d, type: 2}
 --- !u!1 &936141824
 GameObject:
   m_ObjectHideFlags: 0
@@ -5311,7 +5336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPanel: {fileID: 936141825}
   CharacterPanel: {fileID: 456422755}
-  DestructionPanel: {fileID: 88820856}
+  IncrementalPanel: {fileID: 0}
   SuccessPanel: {fileID: 1238773080}
   FailPanel: {fileID: 565330554}
   ScoreImage: {fileID: 53453019}
@@ -5325,8 +5350,8 @@ MonoBehaviour:
   StartY: -2500
   CharacterX: -1500
   CharacterY: 0
-  DestructionX: 1500
-  DestructionY: 0
+  IncrementalX: 0
+  IncrementalY: 0
   ScoreX: 0
   ScoreOldX: 0
   duration: 0.5
@@ -7254,7 +7279,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: INFINITY
+  m_text: MOVE NUMBER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31ad3c7e30fc13b4bae97640b4cf71f9, type: 2}
   m_sharedMaterial: {fileID: 826004609249251169, guid: 31ad3c7e30fc13b4bae97640b4cf71f9, type: 2}

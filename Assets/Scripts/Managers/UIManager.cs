@@ -20,6 +20,14 @@ public class UIManager : MonoBehaviour
     private WaitForSeconds waitForSeconds;
     private WaitForSeconds waitForFill;
 
+    [Header("INCREMENTALS")]
+    [SerializeField] private TextMeshProUGUI increaseScoreIncrementalText;
+    [SerializeField] private TextMeshProUGUI pressTimeIncrementalText;
+    [SerializeField] private TextMeshProUGUI priceIncreaseScoreIncrementalText;
+    [SerializeField] private TextMeshProUGUI pricePressTimeIncrementalText;
+    [SerializeField] private TextMeshProUGUI incrementalScoreText;
+
+
 
 
     
@@ -28,6 +36,7 @@ public class UIManager : MonoBehaviour
     public GameData gameData;
     public PlayerData playerData;
     public LevelData levelData;
+    public IncrementalData incrementalData;
 
     
 
@@ -38,6 +47,10 @@ public class UIManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnUIRequirementUpdate,OnUIRequirementUpdate);
         
         EventManager.AddHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
+
+        //incremental
+        EventManager.AddHandler(GameEvent.OnUpdateIncreaseScore,OnUpdateIncreaseScore);
+        EventManager.AddHandler(GameEvent.OnUpdatePressTime,OnUpdatePressTime);
         
     }
     private void OnDisable()
@@ -47,6 +60,10 @@ public class UIManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnUIRequirementUpdate,OnUIRequirementUpdate);
 
         EventManager.RemoveHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
+
+        //incremental
+        EventManager.RemoveHandler(GameEvent.OnUpdateIncreaseScore,OnUpdateIncreaseScore);
+        EventManager.RemoveHandler(GameEvent.OnUpdatePressTime,OnUpdatePressTime);
         
     }
     
@@ -74,6 +91,25 @@ public class UIManager : MonoBehaviour
         levelText.SetText("LEVEL " + (levelData.IndexOfLevel+1).ToString());
         
     }
+
+    #region Incrementals
+    
+    private void OnUpdateIncreaseScore()
+    {
+        increaseScoreIncrementalText.SetText("+ " +  gameData.increaseScore.ToString());
+        priceIncreaseScoreIncrementalText.SetText(incrementalData.IncreaseScorePrice.ToString());
+        incrementalScoreText.SetText(levelData.score.ToString());
+        
+    }
+
+    private void OnUpdatePressTime()
+    {
+        pressTimeIncrementalText.SetText("+ " +  gameData.PressTime.ToString());
+        pricePressTimeIncrementalText.SetText(incrementalData.PressTimePrice.ToString());
+        incrementalScoreText.SetText(levelData.score.ToString());
+
+    }
+    #endregion
 
     
 

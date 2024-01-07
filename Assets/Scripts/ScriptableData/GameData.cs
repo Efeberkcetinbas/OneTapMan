@@ -13,6 +13,7 @@ public class GameData : ScriptableObject
     public int RoundedTime;
 
     public float Timer;
+    public float PressTime;
 
     public bool isGameEnd=false;
     public bool isStartTimer=false;

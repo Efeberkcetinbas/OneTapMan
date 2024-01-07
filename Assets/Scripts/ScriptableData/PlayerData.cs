@@ -7,5 +7,16 @@ using UnityEngine;
 public class PlayerData : ScriptableObject 
 {
     public bool playerCanMove=true;
+    public int selectedBallIndex;
+
+    public void SaveData()
+    {
+
+    }
+
+    public void LoadData()
+    {
+
+    }
     
 }

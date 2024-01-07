@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using DG.Tweening;
 public class PanelManager : MonoBehaviour
 {
-    [SerializeField] private RectTransform StartPanel,CharacterPanel,DestructionPanel,SuccessPanel,FailPanel,ScoreImage;
+    [SerializeField] private RectTransform StartPanel,CharacterPanel,IncrementalPanel,SuccessPanel,FailPanel,ScoreImage;
 
     [SerializeField] private GameObject[] sceneUI;
     [SerializeField] private Image Fade;
 
-    [SerializeField] private float StartX,StartY,CharacterX,CharacterY,DestructionX,DestructionY,ScoreX,ScoreOldX,duration;
+    [SerializeField] private float StartX,StartY,CharacterX,CharacterY,IncrementalX,IncrementalY,ScoreX,ScoreOldX,duration;
 
     [SerializeField] private GameData gameData;
     [SerializeField] private PlayerData playerData;
@@ -186,25 +186,32 @@ public class PanelManager : MonoBehaviour
         StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>StartPanel.gameObject.SetActive(false));
         CharacterPanel.gameObject.SetActive(true);
         CharacterPanel.DOAnchorPos(new Vector2(0,750),duration);
-        //EventManager.Broadcast(GameEvent.OnShopOpen);
+        EventManager.Broadcast(GameEvent.OnShopOpen);
     }
 
     public void OpenDestructionPanel()
     {
         StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>StartPanel.gameObject.SetActive(false));
-        DestructionPanel.gameObject.SetActive(true);
-        DestructionPanel.DOAnchorPos(new Vector2(0,750),duration);
-        //EventManager.Broadcast(GameEvent.OnShopOpen);
+        IncrementalPanel.gameObject.SetActive(true);
+        IncrementalPanel.DOAnchorPos(new Vector2(0,750),duration);
+        EventManager.Broadcast(GameEvent.OnShopOpen);
     }
 
-    public void BackToStart()
+    public void BackToStart(bool isOnCharacter)
     {
-
-        StartPanel.gameObject.SetActive(true);
-        StartPanel.DOAnchorPos(Vector2.zero,duration);
-        CharacterPanel.DOAnchorPos(new Vector2(CharacterX,CharacterY),duration);
-        EventManager.Broadcast(GameEvent.OnShopClose);
-
-
+        if(isOnCharacter)
+        {
+            StartPanel.gameObject.SetActive(true);
+            StartPanel.DOAnchorPos(Vector2.zero,duration);
+            CharacterPanel.DOAnchorPos(new Vector2(CharacterX,CharacterY),duration);
+            EventManager.Broadcast(GameEvent.OnShopClose);
+        }
+        else
+        {
+            StartPanel.gameObject.SetActive(true);
+            StartPanel.DOAnchorPos(Vector2.zero,duration);
+            CharacterPanel.DOAnchorPos(new Vector2(IncrementalX,IncrementalY),duration);
+            EventManager.Broadcast(GameEvent.OnShopClose);
+        }
     }
 }
