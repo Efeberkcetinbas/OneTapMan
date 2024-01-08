@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField] private GameData gameData;
-
+    [SerializeField] private float screePercentageToExclude=20f;
     
     void Start()
     {
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         if(Input.touchCount>0)
         {
             Touch touch=Input.GetTouch(0);
-            if(touch.phase==TouchPhase.Began)
+            if(touch.phase==TouchPhase.Began && touch.position.y<(Screen.height*(1-screePercentageToExclude/100)))
             {
                 gameData.isStartTimer=!gameData.isStartTimer;
                 SendStartStop();

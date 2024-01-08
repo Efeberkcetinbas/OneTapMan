@@ -10,6 +10,9 @@ public enum GameEvent
     OnCharacterSelected,
     OnCharacterChanged,
 
+    //Settings
+    OnAudioOffOn,
+
     //Incrementals
     OnUpdatePressTime,
     OnUpdateIncreaseScore,
@@ -18,6 +21,7 @@ public enum GameEvent
     //Numbers
     OnMatchNumber,
     OnHitNumbers,
+    OnNumberFall,
 
 
 

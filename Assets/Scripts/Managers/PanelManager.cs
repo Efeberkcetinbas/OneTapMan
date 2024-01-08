@@ -25,6 +25,11 @@ public class PanelManager : MonoBehaviour
     private WaitForSeconds waitForSecondsScore;
 
 
+    [Header("Settings")]
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject settingsButton;
+
+
 
     private void OnEnable() 
     {
@@ -71,6 +76,33 @@ public class PanelManager : MonoBehaviour
         });
     }
 
+    #region Settings
+    public void OpenSettingsPanel()
+    {
+        gameData.isGameEnd=true;
+        settingsPanel.SetActive(true);
+        settingsButton.SetActive(false);
+        settingsPanel.transform.localScale=Vector3.zero;
+        settingsPanel.transform.DOScale(Vector3.one,0.5f).SetEase(Ease.InOutElastic);
+    }
+
+    public void OnAudioOffOn()
+    {
+        EventManager.Broadcast(GameEvent.OnAudioOffOn);
+    }
+
+    public void CloseSettingsPanel()
+    {
+        gameData.isGameEnd=false;
+        settingsPanel.transform.DOScale(Vector3.zero,0.5f).SetEase(Ease.InCubic).OnComplete(()=>{
+            settingsPanel.SetActive(false);
+            settingsButton.SetActive(true);
+        });
+    
+    }
+
+
+    #endregion
     
 
     
@@ -204,14 +236,14 @@ public class PanelManager : MonoBehaviour
             StartPanel.gameObject.SetActive(true);
             StartPanel.DOAnchorPos(Vector2.zero,duration);
             CharacterPanel.DOAnchorPos(new Vector2(CharacterX,CharacterY),duration);
-            //EventManager.Broadcast(GameEvent.OnShopClose);
+            EventManager.Broadcast(GameEvent.OnShopClose);
         }
         else
         {
             StartPanel.gameObject.SetActive(true);
             StartPanel.DOAnchorPos(Vector2.zero,duration);
             IncrementalPanel.DOAnchorPos(new Vector2(IncrementalX,IncrementalY),duration);
-            //EventManager.Broadcast(GameEvent.OnShopClose);
+            EventManager.Broadcast(GameEvent.OnShopClose);
         }
     }
 }

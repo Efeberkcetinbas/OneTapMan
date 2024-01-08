@@ -28,6 +28,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI incrementalScoreText;
 
 
+    [Header("Settings")]
+    [SerializeField] private GameObject soundOn;
+    [SerializeField] private GameObject soundOff;
+    private bool isSoundOn=true;
+
 
 
     
@@ -52,6 +57,9 @@ public class UIManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnUpdateIncreaseScore,OnUpdateIncreaseScore);
         EventManager.AddHandler(GameEvent.OnUpdatePressTime,OnUpdatePressTime);
         
+        //settings
+        EventManager.AddHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
+
     }
     private void OnDisable()
     {
@@ -65,6 +73,9 @@ public class UIManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnUpdateIncreaseScore,OnUpdateIncreaseScore);
         EventManager.RemoveHandler(GameEvent.OnUpdatePressTime,OnUpdatePressTime);
         
+        //settings
+        EventManager.RemoveHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
+
     }
     
     
@@ -113,8 +124,22 @@ public class UIManager : MonoBehaviour
 
     
 
-   
+    private void OnAudioOffOn()
+    {
+        isSoundOn=!isSoundOn;
 
+        if(isSoundOn)
+            SoundOnOff(false,true,soundOn,soundOff);
+        else
+            SoundOnOff(true,false,soundOn,soundOff);
+
+    }
+
+    private void SoundOnOff(bool val1,bool val2,GameObject gameObject1,GameObject gameObject2)
+    {
+        gameObject1.SetActive(val1);
+        gameObject2.SetActive(val2);
+    }
 
 
     private void OnUIRequirementUpdate()
