@@ -30,6 +30,7 @@ public class IncrementalManager : MonoBehaviour
         //Economy Logic Goes Here
         incrementalData.IncreaseScorePrice = IncrementalEconomy(incrementalData.IncreaseScorePrice, GameEvent.OnUpdateIncreaseScore);
         OnIncrementalOpen();
+        incrementalData.SaveDataWithJson();
 
     }
 
@@ -38,6 +39,7 @@ public class IncrementalManager : MonoBehaviour
         //Economy Logic Here
         incrementalData.PressTimePrice =IncrementalEconomy(incrementalData.PressTimePrice,GameEvent.OnUpdatePressTime);
         OnIncrementalOpen();
+        incrementalData.SaveDataWithJson();
     
     }
 
@@ -66,6 +68,7 @@ public class IncrementalManager : MonoBehaviour
             price *= 2;
             EventManager.Broadcast(gameEvent);
             EventManager.Broadcast(GameEvent.OnUIUpdate);
+            levelData.SaveDataWithJson();
             return price; // Return the updated price
         }
         else

@@ -96,7 +96,7 @@ public class UIManager : MonoBehaviour
     
     private void OnUpdateIncreaseScore()
     {
-        increaseScoreIncrementalText.SetText("+ " +  gameData.increaseScore.ToString());
+        increaseScoreIncrementalText.SetText("+ " +  incrementalData.increaseScore.ToString());
         priceIncreaseScoreIncrementalText.SetText(incrementalData.IncreaseScorePrice.ToString());
         incrementalScoreText.SetText(levelData.score.ToString());
         
@@ -104,7 +104,7 @@ public class UIManager : MonoBehaviour
 
     private void OnUpdatePressTime()
     {
-        pressTimeIncrementalText.SetText("+ " +  gameData.PressTime.ToString());
+        pressTimeIncrementalText.SetText("+ " +  incrementalData.pressTime.ToString());
         pricePressTimeIncrementalText.SetText(incrementalData.PressTimePrice.ToString());
         incrementalScoreText.SetText(levelData.score.ToString());
 

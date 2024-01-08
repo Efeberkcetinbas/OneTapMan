@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: IncrementalData
   m_EditorClassIdentifier: 
   PressTimePrice: 5
-  IncreaseScorePrice: 10
+  IncreaseScorePrice: 5
+  increaseScore: 1
+  pressTime: 0

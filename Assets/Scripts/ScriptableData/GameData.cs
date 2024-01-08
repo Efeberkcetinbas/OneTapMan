@@ -7,13 +7,11 @@ using UnityEngine;
 public class GameData : ScriptableObject 
 {
 
-    public int increaseScore;
     public int ReqMove;
     public int NeededNumber;
     public int RoundedTime;
 
     public float Timer;
-    public float PressTime;
 
     public bool isGameEnd=false;
     public bool isStartTimer=false;
