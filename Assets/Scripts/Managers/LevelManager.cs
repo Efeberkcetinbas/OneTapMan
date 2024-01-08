@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
         }
         Debug.Log(levelIndex);
         levels[levelIndex].SetActive(true);
+        
     }
 
     public void LoadNextLevel()

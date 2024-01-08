@@ -9,29 +9,41 @@ public class StopButton : MonoBehaviour
 
     [SerializeField] private float zaxis,oldzAxis,duration;
     [SerializeField] private Transform button;
+
+    [SerializeField] private Color startColor,stopColor;
+
+    private void Start()
+    {
+        //OnNextLevel();
+    }
     
     private void OnEnable()
     {
         EventManager.AddHandler(GameEvent.OnStartTimer,OnStartTimer);
         EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveHandler(GameEvent.OnStartTimer,OnStartTimer);
         EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
     }
 
     private void OnStartTimer()
     {
-        HitButton(Color.green);
+        HitButton(startColor);
     }
 
     private void OnStopTimer()
     {
-        HitButton(Color.red);
+        HitButton(stopColor);
     }
-
+    private void OnNextLevel()
+    {
+        HitButton(stopColor);
+    }
     private void HitButton(Color color)
     {
         meshRenderer.material.DOColor(color,duration);

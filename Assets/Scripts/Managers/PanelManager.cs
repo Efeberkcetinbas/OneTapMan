@@ -14,9 +14,10 @@ public class PanelManager : MonoBehaviour
 
     [SerializeField] private GameData gameData;
     [SerializeField] private PlayerData playerData;
-    [Header("Success List")]
+    [Header("Game Ending List")]
     [SerializeField] private Ease ease;
     [SerializeField] private List<Transform> successElements=new List<Transform>();
+    [SerializeField] private List<Image> stars=new List<Image>();
     [SerializeField] private List<Transform> failElements=new List<Transform>();
 
     //Waitforseconds
@@ -128,6 +129,7 @@ public class PanelManager : MonoBehaviour
     {
        
         SuccessPanel.DOAnchorPos(new Vector2(2500,0),0.1f).OnComplete(()=>{
+            
             for (int i = 0; i < successElements.Count; i++)
             {
                 successElements[i].transform.localScale=Vector3.zero;
@@ -167,6 +169,8 @@ public class PanelManager : MonoBehaviour
         SuccessPanel.gameObject.SetActive(true);
         SuccessPanel.DOAnchorPos(Vector2.zero,0.2f).SetEase(Ease.InOutCubic).OnComplete(()=>{
             StartCoroutine(ItemsAnimation(successElements));
+            StartCoroutine(ItemsFillAnimation(stars));
+            
         });
     }
 
@@ -208,6 +212,20 @@ public class PanelManager : MonoBehaviour
         {
             list[i].transform.DOScale(1f,1f).SetEase(ease);
             yield return waitForSeconds2;
+        }
+    }
+
+    private IEnumerator ItemsFillAnimation(List<Image> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].fillAmount=0;
+        }
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            yield return waitForSeconds2;
+            list[i].DOFillAmount(1,.5f);
         }
     }
 
