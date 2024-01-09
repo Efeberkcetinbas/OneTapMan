@@ -33,6 +33,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject soundOff;
     private bool isSoundOn=true;
 
+    [Header("Challenger Level")]
+    [SerializeField] private TextMeshProUGUI stateNumberText;
+
 
 
     
@@ -60,6 +63,9 @@ public class UIManager : MonoBehaviour
         //settings
         EventManager.AddHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
 
+        //challenger
+        EventManager.AddHandler(GameEvent.OnUpdateChallenger,OnUpdateChallenger);
+
     }
     private void OnDisable()
     {
@@ -75,6 +81,9 @@ public class UIManager : MonoBehaviour
         
         //settings
         EventManager.RemoveHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
+
+        //challenger
+        EventManager.RemoveHandler(GameEvent.OnUpdateChallenger,OnUpdateChallenger);
 
     }
     
@@ -153,6 +162,10 @@ public class UIManager : MonoBehaviour
         //successScore.SetText("+ " +  (levelData.score+gameData.increaseScore).ToString());
     }
 
+    private void OnUpdateChallenger()
+    {
+        stateNumberText.SetText((levelData.challengeIndex+1).ToString() + " / 40 ");
+    }
     private void OnShopBallSelected()
     {
         shoppingScore.SetText(levelData.score.ToString());

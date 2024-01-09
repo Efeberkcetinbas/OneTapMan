@@ -23,7 +23,8 @@ public class ChallengerControl : MonoBehaviour
             numbers[i].SetActive(false);
         }
 
-        numbers[levelData.infinityIndex].SetActive(true);
+        numbers[levelData.challengeIndex].SetActive(true);
+        
     }
     private void OnEnable()
     {
@@ -39,13 +40,14 @@ public class ChallengerControl : MonoBehaviour
 
     private void OnMatchChallengeNumber()
     {
-        levelData.infinityIndex++;
+        levelData.challengeIndex++;
         for (int i = 0; i < numbers.Count; i++)
         {
             numbers[i].SetActive(false);
         }
 
-        numbers[levelData.infinityIndex].SetActive(true);
+        numbers[levelData.challengeIndex].SetActive(true);
+        EventManager.Broadcast(GameEvent.OnUpdateChallenger);
 
         //Sona ulasirsa odul.
     }

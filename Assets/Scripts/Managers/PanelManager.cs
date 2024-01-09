@@ -53,6 +53,7 @@ public class PanelManager : MonoBehaviour
     private void Start() 
     {
         SceneUI(false);
+        DoActive(challengerUI,false);
 
         waitForSeconds1=new WaitForSeconds(2);
         waitForSeconds2=new WaitForSeconds(.5f);
@@ -91,6 +92,7 @@ public class PanelManager : MonoBehaviour
             DoActive(challengerUI,true);
             gameData.isChallengerLevel=true;
             EventManager.Broadcast(GameEvent.OnStartChallengeMode);
+            EventManager.Broadcast(GameEvent.OnUpdateChallenger);
             gameData.isGameEnd=false;
 
         });

@@ -25,7 +25,7 @@ public enum GameEvent
 
     //Challenger
     OnMatchChallengeNumber,
-    OnUpdateChallenge,
+    OnUpdateChallenger,
     OnStartChallengeMode,
 
 
