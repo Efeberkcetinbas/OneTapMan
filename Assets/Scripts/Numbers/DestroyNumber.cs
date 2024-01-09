@@ -11,6 +11,8 @@ public class DestroyNumber : MonoBehaviour
     [SerializeField] private Ease ease;
     [SerializeField] private float jumpPower,duration;
     [SerializeField] private int jumpNumber;
+
+    [SerializeField] private GameObject pillow,character;
     
    
 
@@ -23,6 +25,8 @@ public class DestroyNumber : MonoBehaviour
     {
         
         Instantiate(destructionParticle,transform.position,Quaternion.identity);
+        pillow.SetActive(false);
+        character.SetActive(true);
         EventManager.Broadcast(GameEvent.OnIncreaseScore);
         EventManager.Broadcast(GameEvent.OnHitNumbers);
         transform.DOJump(fromPos.position,jumpPower,jumpNumber,duration).SetEase(ease).OnComplete(()=>{

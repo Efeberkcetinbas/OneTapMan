@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     
     private void Start() 
     {
-        waitForSeconds=new WaitForSeconds(1);
+        waitForSeconds=new WaitForSeconds(3);
         UpdateRequirement();
     }
 
