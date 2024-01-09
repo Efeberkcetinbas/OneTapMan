@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     
     private void Start() 
     {
-        waitForSeconds=new WaitForSeconds(3);
+        waitForSeconds=new WaitForSeconds(1.5f);
         UpdateRequirement();
     }
 
@@ -63,13 +63,16 @@ public class GameManager : MonoBehaviour
     private void OnStopTimer()
     {
         //gameData.ReqMove
-        gameData.ReqMove--;
-        EventManager.Broadcast(GameEvent.OnUIRequirementUpdate);
+        if(!gameData.isChallengerLevel)
+        {
+            gameData.ReqMove--;
+            EventManager.Broadcast(GameEvent.OnUIRequirementUpdate);
 
-        if(gameData.ReqMove>0)
-            return;
-        else
-            StartCoroutine(CheckIfGameEnds());
+            if(gameData.ReqMove>0)
+                return;
+            else
+                StartCoroutine(CheckIfGameEnds());
+        }
     }
 
     private void OnMatchNumber()
@@ -97,7 +100,7 @@ public class GameManager : MonoBehaviour
         gameData.isGameEnd=true;
         Debug.Log("HERE CHECK IF GAME END");
         if(hitNumber==gameData.NeededNumber)
-            EventManager.Broadcast(GameEvent.OnSuccess);
+            StartCoroutine(StartSuccess());
 //            Debug.Log("SUCCESS");
         else
             Debug.Log("FAIL");
@@ -132,6 +135,7 @@ public class GameManager : MonoBehaviour
     void ClearData()
     {
         gameData.isGameEnd=true;
+        gameData.isChallengerLevel=false;
         playerData.playerCanMove=true;
 
 

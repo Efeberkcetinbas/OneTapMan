@@ -34,14 +34,18 @@ public class BetweenNumbers : MonoBehaviour,INumber
     {
         if(leftNumber<gameData.RoundedTime && gameData.RoundedTime<rightNumber)
         {
-            EventManager.Broadcast(GameEvent.OnMatchNumber);
-            Debug.Log("POINT AND EXECUTED");
+            if(!gameData.isChallengerLevel)
+                EventManager.Broadcast(GameEvent.OnMatchNumber);
+            
             destroyNumber.CreateDestructionObject(target);
 
         }
         else
         {
-            return;
+            if(!gameData.isChallengerLevel)
+                return;
+            else
+                Debug.Log("GAME OVER");
         }
 
     }

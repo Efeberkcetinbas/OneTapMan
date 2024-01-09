@@ -21,21 +21,33 @@ public class DestroyNumber : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    //Normal levels
+
     internal void CreateDestructionObject(Transform fromPos)
     {
-        
-        Instantiate(destructionParticle,transform.position,Quaternion.identity);
-        pillow.SetActive(false);
-        character.SetActive(true);
-        EventManager.Broadcast(GameEvent.OnIncreaseScore);
-        EventManager.Broadcast(GameEvent.OnHitNumbers);
-        transform.DOJump(fromPos.position,jumpPower,jumpNumber,duration).SetEase(ease).OnComplete(()=>{
-            EventManager.Broadcast(GameEvent.OnNumberFall);
-            transform.DOScale(Vector3.zero,0.25f).SetEase(ease).OnComplete(()=>{
-                Destruction();
+        if(!gameData.isChallengerLevel)
+        {
+            Instantiate(destructionParticle,transform.position,Quaternion.identity);
+            pillow.SetActive(false);
+            character.SetActive(true);
+            EventManager.Broadcast(GameEvent.OnIncreaseScore);
+            EventManager.Broadcast(GameEvent.OnHitNumbers);
+            transform.DOJump(fromPos.position,jumpPower,jumpNumber,duration).SetEase(ease).OnComplete(()=>{
+                EventManager.Broadcast(GameEvent.OnNumberFall);
+                transform.DOScale(Vector3.zero,0.25f).SetEase(ease).OnComplete(()=>{
+                    Destruction();
 
+                });
             });
-        });
+        }
+
+        else
+        {
+            EventManager.Broadcast(GameEvent.OnMatchChallengeNumber);
+            //EventManager.Broadcast(GameEvent.OnUpdateChallenge);
+        }
     }
+
+    //Challenger levels
     
 }

@@ -30,6 +30,10 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject settingsButton;
 
+    [Header("Challenger")]
+    [SerializeField] private List<GameObject> LevelsUI=new List<GameObject>();
+    [SerializeField] private List<GameObject> challengerUI=new List<GameObject>();
+
 
 
     private void OnEnable() 
@@ -66,6 +70,8 @@ public class PanelManager : MonoBehaviour
         //EventManager.Broadcast(GameEvent.OnButtonClicked);
         StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>{
             SceneUI(true);
+            DoActive(LevelsUI,true);
+            DoActive(challengerUI,false);
             /*ScoreImage.DOAnchorPosX(ScoreOldX,0.5f);
             StartCoroutine(ScoreMove());*/
             //player.transform.DOMoveY(0.5f,0.5f).OnComplete(()=>playerData.playerCanMove=true);
@@ -75,6 +81,20 @@ public class PanelManager : MonoBehaviour
 
             //StartPanel.gameObject.SetActive(false);
         });
+    }
+
+    public void StartChallengeMode()
+    {
+        StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>{
+            SceneUI(true);
+            DoActive(LevelsUI,false);
+            DoActive(challengerUI,true);
+            gameData.isChallengerLevel=true;
+            EventManager.Broadcast(GameEvent.OnStartChallengeMode);
+            gameData.isGameEnd=false;
+
+        });
+        
     }
 
     #region Settings
@@ -151,7 +171,13 @@ public class PanelManager : MonoBehaviour
     }
 
    
-
+    private void DoActive(List<GameObject> UIs,bool val)
+    {
+        for (int i = 0; i < UIs.Count; i++)
+        {
+            UIs[i].SetActive(val);
+        }
+    }
     
 
     private void SceneUI(bool val)

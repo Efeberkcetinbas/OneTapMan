@@ -23,6 +23,11 @@ public enum GameEvent
     OnHitNumbers,
     OnNumberFall,
 
+    //Challenger
+    OnMatchChallengeNumber,
+    OnUpdateChallenge,
+    OnStartChallengeMode,
+
 
 
 

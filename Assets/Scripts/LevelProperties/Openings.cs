@@ -12,7 +12,7 @@ public class Openings : MonoBehaviour
     [SerializeField] private float duration;
 
     private WaitForSeconds waitForSeconds;
-
+    [SerializeField] private GameData gameData;
     private void Start()
     {
         waitForSeconds=new WaitForSeconds(.2f);
@@ -35,7 +35,8 @@ public class Openings : MonoBehaviour
     }
     private void OnStartGame()
     {
-        StartCoroutine(StartCubes());
+        if(!gameData.isChallengerLevel)
+            StartCoroutine(StartCubes());
     }
 
     private IEnumerator StartCubes()

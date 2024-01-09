@@ -9,6 +9,7 @@ public class LevelData : ScriptableObject
     public int IndexOfLevel;
     public int score;
 
+    public int infinityIndex;
 
     private string filePath;
 

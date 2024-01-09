@@ -33,13 +33,17 @@ public class MultiplyNumber : MonoBehaviour,INumber
     {
         if(gameData.RoundedTime%number==0)
         {
-            EventManager.Broadcast(GameEvent.OnMatchNumber);
-            Debug.Log("MULTIPLYYY");
+            if(!gameData.isChallengerLevel)
+                EventManager.Broadcast(GameEvent.OnMatchNumber);
+            
             destroyNumber.CreateDestructionObject(fromTarget);
         }
         else
         {
-            return;
+            if(!gameData.isChallengerLevel)
+                return;
+            else
+                Debug.Log("GAME OVER");
         }
 
     }

@@ -34,13 +34,17 @@ public class OneNumber : MonoBehaviour, INumber
     {
         if(number==gameData.RoundedTime)
         {
-            EventManager.Broadcast(GameEvent.OnMatchNumber);
-            Debug.Log("POINT AND EXECUTED");
+            if(!gameData.isChallengerLevel)
+                EventManager.Broadcast(GameEvent.OnMatchNumber);
+           
             destroyNumber.CreateDestructionObject(fromTarget);
         }
         else
         {
-            return;
+            if(!gameData.isChallengerLevel)
+                return;
+            else
+                Debug.Log("GAME OVER");
         }
 
 
