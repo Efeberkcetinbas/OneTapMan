@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     //Boss Ball
 
     private WaitForSeconds waitForSeconds;
+    private WaitForSeconds waitForSecondsFail;
 
     [SerializeField]private int hitNumber;
 
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     private void Start() 
     {
         waitForSeconds=new WaitForSeconds(1.5f);
+        waitForSecondsFail=new WaitForSeconds(.5f);
         UpdateRequirement();
     }
 
@@ -39,6 +41,8 @@ public class GameManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
         EventManager.AddHandler(GameEvent.OnMatchNumber,OnMatchNumber);
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
+        EventManager.AddHandler(GameEvent.OnFail,OnFail);
+        EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
 
     }
 
@@ -48,6 +52,8 @@ public class GameManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
         EventManager.RemoveHandler(GameEvent.OnMatchNumber,OnMatchNumber);
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
+        EventManager.RemoveHandler(GameEvent.OnFail,OnFail);
+        EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
 
     }
 
@@ -94,6 +100,12 @@ public class GameManager : MonoBehaviour
         EventManager.Broadcast(GameEvent.OnSuccess);
     }
 
+    private IEnumerator StartFail()
+    {
+        yield return waitForSecondsFail;
+        EventManager.Broadcast(GameEvent.OnFail);
+    }
+
     private IEnumerator CheckIfGameEnds()
     {
         yield return waitForSeconds;
@@ -103,7 +115,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(StartSuccess());
 //            Debug.Log("SUCCESS");
         else
-            Debug.Log("FAIL");
+            StartCoroutine(StartFail());
     }
 
     private void OnSuccess()
@@ -112,11 +124,24 @@ public class GameManager : MonoBehaviour
         StartCoroutine(OpenSuccessPanel());
     }
 
+    private void OnFail()
+    {
+        gameData.isGameEnd=true;
+        StartCoroutine(OpenFailPanel());
+    }
+
     private IEnumerator OpenSuccessPanel()
     {
         yield return waitForSeconds;
         EventManager.Broadcast(GameEvent.OnOpenSuccess);
     }
+
+    private IEnumerator OpenFailPanel()
+    {
+        yield return waitForSeconds;
+        EventManager.Broadcast(GameEvent.OnOpenFail);
+    }
+
     
 
 
@@ -128,6 +153,8 @@ public class GameManager : MonoBehaviour
 
     private void OnRestartLevel()
     {
+        gameData.isGameEnd=false;
+        hitNumber=0;
         UpdateRequirement();
     }
     

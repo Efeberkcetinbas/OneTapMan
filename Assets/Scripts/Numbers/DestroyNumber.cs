@@ -13,7 +13,16 @@ public class DestroyNumber : MonoBehaviour
     [SerializeField] private int jumpNumber;
 
     [SerializeField] private GameObject pillow,character;
-    
+
+    private Vector3 firstPosition;
+
+
+    private void Start()
+    {
+        firstPosition=transform.position;
+        Debug.Log(gameObject.name + ": " + firstPosition);
+    }
+
    
 
     private void Destruction()
@@ -46,6 +55,15 @@ public class DestroyNumber : MonoBehaviour
             EventManager.Broadcast(GameEvent.OnMatchChallengeNumber);
             //EventManager.Broadcast(GameEvent.OnUpdateChallenge);
         }
+    }
+
+
+    internal void OnRestartLevel()
+    {
+        transform.position=firstPosition;
+        pillow.SetActive(true);
+        character.SetActive(false);
+        
     }
 
     //Challenger levels

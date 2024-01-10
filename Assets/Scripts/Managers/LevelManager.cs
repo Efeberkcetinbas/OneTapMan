@@ -60,6 +60,7 @@ public class LevelManager : MonoBehaviour
     {
         //LoadLevel();
         Debug.Log("RESTART LEVEL");
+        EventManager.Broadcast(GameEvent.OnRestartLevel);
     }
 
     

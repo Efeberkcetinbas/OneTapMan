@@ -25,12 +25,14 @@ public class Openings : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddHandler(GameEvent.OnStartGame,OnStartGame);
+        EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
 
     }
 
     private void OnDisable()
     {
         EventManager.RemoveHandler(GameEvent.OnStartGame,OnStartGame);
+        EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
 
     }
     private void OnStartGame()
@@ -49,5 +51,10 @@ public class Openings : MonoBehaviour
             yield return waitForSeconds;
 
         }
+    }
+
+    private void OnRestartLevel()
+    {
+        StartCoroutine(StartCubes());
     }
 }

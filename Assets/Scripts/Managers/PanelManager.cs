@@ -40,6 +40,8 @@ public class PanelManager : MonoBehaviour
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
+        EventManager.AddHandler(GameEvent.OnOpenFail,OnOpenFail);
+        EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
 
     }
 
@@ -48,6 +50,9 @@ public class PanelManager : MonoBehaviour
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
+        EventManager.RemoveHandler(GameEvent.OnOpenFail,OnOpenFail);
+        EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
+
     }
 
     private void Start() 
