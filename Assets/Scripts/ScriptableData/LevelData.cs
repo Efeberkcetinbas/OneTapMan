@@ -10,6 +10,7 @@ public class LevelData : ScriptableObject
     public int score;
 
     public int challengeIndex;
+    public int highScoreChalleIndex;
 
     private string filePath;
 

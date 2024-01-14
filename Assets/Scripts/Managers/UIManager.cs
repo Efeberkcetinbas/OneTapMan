@@ -35,6 +35,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Challenger Level")]
     [SerializeField] private TextMeshProUGUI stateNumberText;
+    [SerializeField] private TextMeshProUGUI challengeScoreText;
+    [SerializeField] private TextMeshProUGUI challengeHighScoreText;
 
 
 
@@ -65,6 +67,7 @@ public class UIManager : MonoBehaviour
 
         //challenger
         EventManager.AddHandler(GameEvent.OnUpdateChallenger,OnUpdateChallenger);
+        EventManager.AddHandler(GameEvent.OnChallengerGameOverUI,OnChallengerGameOverUI);
 
     }
     private void OnDisable()
@@ -84,6 +87,7 @@ public class UIManager : MonoBehaviour
 
         //challenger
         EventManager.RemoveHandler(GameEvent.OnUpdateChallenger,OnUpdateChallenger);
+        EventManager.RemoveHandler(GameEvent.OnChallengerGameOverUI,OnChallengerGameOverUI);
 
     }
     
@@ -165,6 +169,12 @@ public class UIManager : MonoBehaviour
     private void OnUpdateChallenger()
     {
         stateNumberText.SetText((levelData.challengeIndex+1).ToString() + " / 40 ");
+    }
+
+    private void OnChallengerGameOverUI()
+    {
+        challengeScoreText.SetText("Score: " + (levelData.challengeIndex+1).ToString() + " / 40 ");
+        challengeHighScoreText.SetText("HighScore: " + (levelData.highScoreChalleIndex+1).ToString() + " / 40 ");
     }
     private void OnShopBallSelected()
     {

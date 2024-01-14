@@ -27,6 +27,8 @@ public enum GameEvent
     OnMatchChallengeNumber,
     OnUpdateChallenger,
     OnStartChallengeMode,
+    OnChallengerGameOver,
+    OnChallengerGameOverUI,
 
 
 
@@ -56,7 +58,7 @@ public class EventManager
     
     private static Dictionary<GameEvent,Action<int>> IdEventTable=new Dictionary<GameEvent, Action<int>>();
     //2 parametre baglayacagimiz ile bagladigimiz
-
+    
     
     public static void AddHandler(GameEvent gameEvent,Action action)
     {

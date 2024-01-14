@@ -20,7 +20,6 @@ public class DestroyNumber : MonoBehaviour
     private void Start()
     {
         firstPosition=transform.position;
-        Debug.Log(gameObject.name + ": " + firstPosition);
     }
 
    

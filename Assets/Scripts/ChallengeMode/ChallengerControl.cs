@@ -30,12 +30,16 @@ public class ChallengerControl : MonoBehaviour
     {
         EventManager.AddHandler(GameEvent.OnMatchChallengeNumber,OnMatchChallengeNumber);
         EventManager.AddHandler(GameEvent.OnStartChallengeMode,OnStartChallengeMode);
+        EventManager.AddHandler(GameEvent.OnChallengerGameOver,OnChallengerGameOver);
+
     }
 
     private void OnDisable()
     {
         EventManager.RemoveHandler(GameEvent.OnMatchChallengeNumber,OnMatchChallengeNumber);
         EventManager.RemoveHandler(GameEvent.OnStartChallengeMode,OnStartChallengeMode);
+        EventManager.RemoveHandler(GameEvent.OnChallengerGameOver,OnChallengerGameOver);
+
     }
 
     private void OnMatchChallengeNumber()
@@ -50,6 +54,14 @@ public class ChallengerControl : MonoBehaviour
         EventManager.Broadcast(GameEvent.OnUpdateChallenger);
 
         //Sona ulasirsa odul.
+    }
+
+    private void OnChallengerGameOver()
+    {
+        for (int i = 0; i < numbers.Count; i++)
+        {
+            numbers[i].SetActive(false);
+        }
     }
 
 

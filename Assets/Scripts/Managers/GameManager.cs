@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [Header("Scriptable Data's")]
     public GameData gameData;
     public PlayerData playerData;
+    public LevelData levelData;
 
 
     [Header("Open/Close")]
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.AddHandler(GameEvent.OnFail,OnFail);
         EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
+        EventManager.AddHandler(GameEvent.OnChallengerGameOver,OnChallengerGameOver);
 
     }
 
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.RemoveHandler(GameEvent.OnFail,OnFail);
         EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
+        EventManager.RemoveHandler(GameEvent.OnChallengerGameOver,OnChallengerGameOver);
 
     }
 
@@ -142,7 +145,19 @@ public class GameManager : MonoBehaviour
         EventManager.Broadcast(GameEvent.OnOpenFail);
     }
 
-    
+    private void CheckHighScore()
+    {
+        if(levelData.challengeIndex>levelData.highScoreChalleIndex)
+        {
+            levelData.highScoreChalleIndex=levelData.challengeIndex;
+            PlayerPrefs.SetInt("challengerHighScore",levelData.highScoreChalleIndex);
+        }
+    }
+
+    private void OnChallengerGameOver()
+    {
+        CheckHighScore();
+    }
 
 
     private void OnNextLevel()
@@ -157,6 +172,8 @@ public class GameManager : MonoBehaviour
         hitNumber=0;
         UpdateRequirement();
     }
+
+   
     
     
     void ClearData()
@@ -164,8 +181,9 @@ public class GameManager : MonoBehaviour
         gameData.isGameEnd=true;
         gameData.isChallengerLevel=false;
         playerData.playerCanMove=true;
-
-
+        
+        levelData.challengeIndex=0;
+        levelData.highScoreChalleIndex=PlayerPrefs.GetInt("challengerHighScore");
         hitNumber=0;
    
     }

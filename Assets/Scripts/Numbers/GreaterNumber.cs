@@ -43,7 +43,7 @@ public class GreaterNumber : MonoBehaviour,INumber
            if(!gameData.isChallengerLevel)
                 return;
             else
-                Debug.Log("GAME OVER");
+                EventManager.Broadcast(GameEvent.OnChallengerGameOver);
         }
 
     }
