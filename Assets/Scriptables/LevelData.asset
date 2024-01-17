@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de04a975ab331543ba76c8cb63807e3, type: 3}
   m_Name: LevelData
   m_EditorClassIdentifier: 
-  IndexOfLevel: 1
-  score: 5
+  IndexOfLevel: 0
+  score: 10
   challengeIndex: 0
+  highScoreChalleIndex: 7
