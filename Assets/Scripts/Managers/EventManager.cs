@@ -9,10 +9,22 @@ public enum GameEvent
     OnShopClose,
     OnCharacterSelected,
     OnCharacterChanged,
+   
 
     //Sword
     OnThrowSword,
     OnHitSword,
+
+    //Buffs
+    OnInfinity,
+    OnPassionVictory,
+    OnOnePunchMan,
+    OnCloseInfinity,
+    OnClosePassionVictory,
+    OnCloseOnePunchMan,
+    OnOpenBuffPanel,
+    OnBoughtBuff,
+    OnUpdateBuff,
 
     //Settings
     OnAudioOffOn,
@@ -33,6 +45,7 @@ public enum GameEvent
     OnStartChallengeMode,
     OnChallengerGameOver,
     OnChallengerGameOverUI,
+
 
 
 

@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using DG.Tweening;
 public class PanelManager : MonoBehaviour
 {
-    [SerializeField] private RectTransform StartPanel,CharacterPanel,IncrementalPanel,SuccessPanel,FailPanel,ScoreImage,ChallengerPanel;
+    [SerializeField] private RectTransform StartPanel,CharacterPanel,IncrementalPanel,SuccessPanel,FailPanel,BuffPanel,ScoreImage,ChallengerPanel;
 
     [SerializeField] private GameObject[] sceneUI;
     [SerializeField] private Image Fade;
 
-    [SerializeField] private float StartX,StartY,CharacterX,CharacterY,IncrementalX,IncrementalY,ScoreX,ScoreOldX,duration;
+    [SerializeField] private float StartX,StartY,BuffX,BuffY,CharacterX,CharacterY,IncrementalX,IncrementalY,ScoreX,ScoreOldX,duration;
 
     [SerializeField] private GameData gameData;
     [SerializeField] private PlayerData playerData;
@@ -348,6 +348,14 @@ public class PanelManager : MonoBehaviour
         EventManager.Broadcast(GameEvent.OnIncrementalOpen);
     }
 
+    public void OpenBuffsPanel()
+    {
+        StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>StartPanel.gameObject.SetActive(false));
+        BuffPanel.gameObject.SetActive(true);
+        BuffPanel.DOAnchorPos(Vector2.zero,duration);
+        EventManager.Broadcast(GameEvent.OnOpenBuffPanel);
+    }
+
     public void BackToStart(bool isOnCharacter)
     {
         if(isOnCharacter)
@@ -364,5 +372,13 @@ public class PanelManager : MonoBehaviour
             IncrementalPanel.DOAnchorPos(new Vector2(IncrementalX,IncrementalY),duration);
             EventManager.Broadcast(GameEvent.OnShopClose);
         }
+    }
+
+    public void BackToStartFromBuff()
+    {
+        StartPanel.gameObject.SetActive(true);
+        StartPanel.DOAnchorPos(Vector2.zero,duration);
+        BuffPanel.DOAnchorPos(new Vector2(IncrementalX,IncrementalY),duration);
+        EventManager.Broadcast(GameEvent.OnShopClose);
     }
 }

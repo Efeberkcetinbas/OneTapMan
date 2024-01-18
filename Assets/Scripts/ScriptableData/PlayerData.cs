@@ -9,6 +9,16 @@ public class PlayerData : ScriptableObject
     public bool playerCanMove=true;
     public int selectedBallIndex;
 
+
+    public bool isInfinity=false;
+    public bool isPassionVictory=false;
+    public bool isOnePunchMan=false;
+
+    //Prices
+    public int PriceValInfinity;
+    public int PriceValPassionVictory;
+    public int PriceValOnePunchMan;
+
     public void SaveData()
     {
 

@@ -10,6 +10,8 @@ public class GameData : ScriptableObject
     public int ReqMove;
     public int NeededNumber;
     public int RoundedTime;
+    public int XP;
+    public int BuffTime;
 
     public float Timer;
 
