@@ -10,6 +10,10 @@ public enum GameEvent
     OnCharacterSelected,
     OnCharacterChanged,
 
+    //Sword
+    OnThrowSword,
+    OnHitSword,
+
     //Settings
     OnAudioOffOn,
 

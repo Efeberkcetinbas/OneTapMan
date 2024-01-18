@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1715746103032899928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 452406935293969871}
+  m_Layer: 0
+  m_Name: Bullseye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &452406935293969871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715746103032899928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2528267954066415485}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2528267954066415481
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +66,7 @@ Transform:
   m_Children:
   - {fileID: 8476164495291181609}
   - {fileID: 3791552310445892772}
+  - {fileID: 452406935293969871}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -104,6 +136,7 @@ MonoBehaviour:
   number: 10
   gameData: {fileID: 11400000, guid: c79bc842d854c2847b9735fa4a72e99d, type: 2}
   fromTarget: {fileID: 0}
+  bullseye: {fileID: 452406935293969871}
 --- !u!114 &397573888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,12 +151,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: c79bc842d854c2847b9735fa4a72e99d, type: 2}
   destructionParticle: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
-  ease: 30
+  ease: 0
   jumpPower: 1
   duration: 2
   jumpNumber: 1
   pillow: {fileID: 9145317842716700819}
   character: {fileID: 5913198279166835801}
+  destructionObject: {fileID: 347157802680847325, guid: 819154b9cadb6fa41a4e1b4686e9945e, type: 3}
 --- !u!65 &1011450940338960312
 BoxCollider:
   m_ObjectHideFlags: 0

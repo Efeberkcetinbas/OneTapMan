@@ -207,6 +207,7 @@ Transform:
   m_Children:
   - {fileID: 4742095952242996178}
   - {fileID: 3227838088960018005}
+  - {fileID: 7290027758409566488}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -274,12 +275,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: c79bc842d854c2847b9735fa4a72e99d, type: 2}
   destructionParticle: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
-  ease: 30
+  ease: 0
   jumpPower: 1
   duration: 2
   jumpNumber: 1
   pillow: {fileID: 5369592063521368424}
   character: {fileID: 6552111849141981449}
+  destructionObject: {fileID: 347157802680847325, guid: 819154b9cadb6fa41a4e1b4686e9945e, type: 3}
 --- !u!114 &3778007267805980410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +298,7 @@ MonoBehaviour:
   number: 90
   gameData: {fileID: 11400000, guid: c79bc842d854c2847b9735fa4a72e99d, type: 2}
   fromTarget: {fileID: 0}
+  bullseye: {fileID: 7290027758409566488}
 --- !u!65 &697430571173585483
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -424,6 +427,37 @@ Transform:
   - {fileID: 7217821276934579111}
   m_Father: {fileID: 1691132278378907270}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7436165395526628947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7290027758409566488}
+  m_Layer: 0
+  m_Name: Bullseye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7290027758409566488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7436165395526628947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1691132278378907270}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3794013882421796258
 PrefabInstance:

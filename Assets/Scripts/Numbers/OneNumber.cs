@@ -12,7 +12,7 @@ public class OneNumber : MonoBehaviour, INumber
     [SerializeField] private GameData gameData;
 
     private DestroyNumber destroyNumber;
-    [SerializeField] private Transform fromTarget;
+    [SerializeField] private Transform fromTarget,bullseye;
     
 
     private void Start()
@@ -37,7 +37,7 @@ public class OneNumber : MonoBehaviour, INumber
             if(!gameData.isChallengerLevel)
                 EventManager.Broadcast(GameEvent.OnMatchNumber);
            
-            destroyNumber.CreateDestructionObject(fromTarget);
+            destroyNumber.CreateDestructionObject(fromTarget,bullseye);
         }
         else
         {

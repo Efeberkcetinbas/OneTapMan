@@ -6,7 +6,7 @@ public class AudioManager : MonoBehaviour
 {
     public AudioClip GameLoop,BuffMusic;
     public AudioClip successSound,openSuccessSound,HitNumberSound,StopSound,FallSound,OpeningSound,NextLevelSound,
-    UISound;
+    UISound,throwSound,swordHitSound;
 
     AudioSource musicSource,effectSource;
 
@@ -34,6 +34,8 @@ public class AudioManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnStartGame,OnStartGame);
         EventManager.AddHandler(GameEvent.OnIncrementalOpen,OnIncrementalOpen);
         EventManager.AddHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
+        EventManager.AddHandler(GameEvent.OnThrowSword,OnThrowSword);
+        EventManager.AddHandler(GameEvent.OnHitSword,OnHitSword);
 
     }
     private void OnDisable() 
@@ -50,6 +52,8 @@ public class AudioManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnStartGame,OnStartGame);
         EventManager.RemoveHandler(GameEvent.OnIncrementalOpen,OnIncrementalOpen);
         EventManager.RemoveHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
+        EventManager.RemoveHandler(GameEvent.OnThrowSword,OnThrowSword);
+        EventManager.RemoveHandler(GameEvent.OnHitSword,OnHitSword);
         
     }
 
@@ -113,6 +117,16 @@ public class AudioManager : MonoBehaviour
     private void OnIncrementalOpen()
     {
         effectSource.PlayOneShot(UISound);
+    }
+
+    private void OnThrowSword()
+    {
+        effectSource.PlayOneShot(throwSound);
+    }
+
+    private void OnHitSword()
+    {
+        effectSource.PlayOneShot(swordHitSound);
     }
 
     private void OnAudioOffOn()

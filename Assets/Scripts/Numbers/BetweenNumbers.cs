@@ -13,7 +13,7 @@ public class BetweenNumbers : MonoBehaviour,INumber
 
     private DestroyNumber destroyNumber;
 
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform target,bullseye;
 
     private void Start()
     {
@@ -37,7 +37,7 @@ public class BetweenNumbers : MonoBehaviour,INumber
             if(!gameData.isChallengerLevel)
                 EventManager.Broadcast(GameEvent.OnMatchNumber);
             
-            destroyNumber.CreateDestructionObject(target);
+            destroyNumber.CreateDestructionObject(target,bullseye);
 
         }
         else

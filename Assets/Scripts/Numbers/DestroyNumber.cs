@@ -13,8 +13,11 @@ public class DestroyNumber : MonoBehaviour
     [SerializeField] private int jumpNumber;
 
     [SerializeField] private GameObject pillow,character;
+    [SerializeField] private GameObject destructionObject;
 
     private Vector3 firstPosition;
+
+    private Sequence sequence;
 
 
     private void Start()
@@ -31,11 +34,38 @@ public class DestroyNumber : MonoBehaviour
 
     //Normal levels
 
-    internal void CreateDestructionObject(Transform fromPos)
+    internal void CreateDestructionObject(Transform fromPos,Transform targetPos)
     {
         if(!gameData.isChallengerLevel)
         {
-            Instantiate(destructionParticle,transform.position,Quaternion.identity);
+            GameObject destructionClone=Instantiate(destructionObject);
+            EventManager.Broadcast(GameEvent.OnThrowSword);
+            //Event firlat. El kapansin
+            destructionClone.transform.position=fromPos.position;
+            /*destructionClone.transform.DOMove(targetPos.position,0.25f).SetEase(ease).OnComplete(()=>{
+                Destroy(destructionClone);
+                Destruction();
+            });*/
+            destructionClone.transform.localScale=Vector3.zero;
+            destructionClone.transform.DOScale(Vector3.one,.5f).OnComplete(()=>{
+                Sequence sequence=DOTween.Sequence();
+                
+                sequence.Append(destructionClone.transform.DOMove(targetPos.position,duration)
+                    .SetEase(ease))
+                    .Join(destructionClone.transform.DORotate(new Vector3(360,0,0),duration,RotateMode.FastBeyond360));
+
+                
+
+                sequence.OnComplete(()=>{
+                    EventManager.Broadcast(GameEvent.OnHitSword);
+                    Destroy(destructionClone);
+                    Destruction();
+                });
+            });
+            
+            //Collider ile carpisma gerceklesir
+
+            /*Instantiate(destructionParticle,transform.position,Quaternion.identity);
             pillow.SetActive(false);
             character.SetActive(true);
             EventManager.Broadcast(GameEvent.OnIncreaseScore);
@@ -46,7 +76,7 @@ public class DestroyNumber : MonoBehaviour
                     Destruction();
 
                 });
-            });
+            });*/
         }
 
         else
