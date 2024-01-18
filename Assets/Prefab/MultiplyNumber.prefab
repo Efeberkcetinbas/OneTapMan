@@ -102,14 +102,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: c79bc842d854c2847b9735fa4a72e99d, type: 2}
-  destructionParticle: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
+  destructionParticle: {fileID: 1845240806346120, guid: b395d5d6eb4b4b846acc021ee036b744, type: 3}
   ease: 0
   jumpPower: 1
-  duration: 2
+  duration: 0.5
   jumpNumber: 1
   pillow: {fileID: 1702514892846410948}
   character: {fileID: 4963049564902951550}
   destructionObject: {fileID: 347157802680847325, guid: 819154b9cadb6fa41a4e1b4686e9945e, type: 3}
+  target: {fileID: 0}
+  window: {fileID: 0}
 --- !u!114 &1702514891952892308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +454,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7482922346411675657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -17,7 +17,9 @@ public class DestroyNumber : MonoBehaviour
 
     private Vector3 firstPosition;
 
-    private Sequence sequence;
+    [SerializeField] private Transform target;
+
+    [SerializeField] private Window window;
 
 
     private void Start()
@@ -41,23 +43,25 @@ public class DestroyNumber : MonoBehaviour
             GameObject destructionClone=Instantiate(destructionObject);
             EventManager.Broadcast(GameEvent.OnThrowSword);
             //Event firlat. El kapansin
-            destructionClone.transform.position=fromPos.position;
+            destructionClone.transform.position=target.position;
             /*destructionClone.transform.DOMove(targetPos.position,0.25f).SetEase(ease).OnComplete(()=>{
                 Destroy(destructionClone);
                 Destruction();
             });*/
-            destructionClone.transform.localScale=Vector3.zero;
-            destructionClone.transform.DOScale(Vector3.one,.5f).OnComplete(()=>{
+            //destructionClone.transform.localScale=Vector3.zero;
+            destructionClone.transform.DOMove(fromPos.position,.5f).OnComplete(()=>{
                 Sequence sequence=DOTween.Sequence();
                 
                 sequence.Append(destructionClone.transform.DOMove(targetPos.position,duration)
                     .SetEase(ease))
-                    .Join(destructionClone.transform.DORotate(new Vector3(360,0,0),duration,RotateMode.FastBeyond360));
+                    .Join(destructionClone.transform.DORotate(new Vector3(90,0,0),duration,RotateMode.FastBeyond360));
 
                 
 
                 sequence.OnComplete(()=>{
                     EventManager.Broadcast(GameEvent.OnHitSword);
+                    window.OnHitSword();
+                    Instantiate(destructionParticle,transform.position,Quaternion.identity);
                     Destroy(destructionClone);
                     Destruction();
                 });
@@ -65,7 +69,7 @@ public class DestroyNumber : MonoBehaviour
             
             //Collider ile carpisma gerceklesir
 
-            /*Instantiate(destructionParticle,transform.position,Quaternion.identity);
+            /*
             pillow.SetActive(false);
             character.SetActive(true);
             EventManager.Broadcast(GameEvent.OnIncreaseScore);

@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 public class StopButton : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem particle,changeParticle;
+    [SerializeField] private ParticleSystem particle,changeParticle,spawnParticle;
     [SerializeField] private SkinnedMeshRenderer meshRenderer;
     
 
@@ -63,6 +63,7 @@ public class StopButton : MonoBehaviour
 
     private void OnThrowSword()
     {
+        spawnParticle.Play();
         GHand.DOScale(Vector3.one*1.25f,.15f).OnComplete(()=>
         {
             GHand.DOScale(Vector3.one,.15f).SetEase(ease);
