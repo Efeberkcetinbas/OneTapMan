@@ -25,6 +25,7 @@ public enum GameEvent
     OnOpenBuffPanel,
     OnBoughtBuff,
     OnUpdateBuff,
+    OnUpdateBuffTime,
 
     //Settings
     OnAudioOffOn,

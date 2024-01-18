@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI pressTimeIncrementalText;
     [SerializeField] private TextMeshProUGUI priceIncreaseScoreIncrementalText;
     [SerializeField] private TextMeshProUGUI pricePressTimeIncrementalText;
+    [SerializeField] private TextMeshProUGUI priceBuffTimeIncrementalText;
+    [SerializeField] private TextMeshProUGUI buffTimeIncrementalText;
     [SerializeField] private TextMeshProUGUI incrementalScoreText;
 
 
@@ -61,6 +63,7 @@ public class UIManager : MonoBehaviour
         //incremental
         EventManager.AddHandler(GameEvent.OnUpdateIncreaseScore,OnUpdateIncreaseScore);
         EventManager.AddHandler(GameEvent.OnUpdatePressTime,OnUpdatePressTime);
+        EventManager.AddHandler(GameEvent.OnUpdateBuffTime,OnUpdateBuffTime);
         
         //settings
         EventManager.AddHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
@@ -81,7 +84,7 @@ public class UIManager : MonoBehaviour
         //incremental
         EventManager.RemoveHandler(GameEvent.OnUpdateIncreaseScore,OnUpdateIncreaseScore);
         EventManager.RemoveHandler(GameEvent.OnUpdatePressTime,OnUpdatePressTime);
-        
+        EventManager.RemoveHandler(GameEvent.OnUpdateBuffTime,OnUpdateBuffTime);
         //settings
         EventManager.RemoveHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
 
@@ -128,10 +131,17 @@ public class UIManager : MonoBehaviour
 
     private void OnUpdatePressTime()
     {
-        pressTimeIncrementalText.SetText("+ " +  incrementalData.pressTime.ToString());
+        pressTimeIncrementalText.SetText(incrementalData.pressTime.ToString());
         pricePressTimeIncrementalText.SetText(incrementalData.PressTimePrice.ToString());
         incrementalScoreText.SetText(levelData.score.ToString());
 
+    }
+
+    private void OnUpdateBuffTime()
+    {
+        buffTimeIncrementalText.SetText(gameData.BuffTime.ToString());
+        priceBuffTimeIncrementalText.SetText(incrementalData.BuffTimePrice.ToString());
+        incrementalScoreText.SetText(levelData.score.ToString());
     }
     #endregion
 

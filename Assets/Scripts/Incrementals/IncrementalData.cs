@@ -10,6 +10,7 @@ public class IncrementalData : ScriptableObject
 
     public int PressTimePrice;
     public int IncreaseScorePrice;
+    public int BuffTimePrice;
     public int increaseScore;
 
     public float pressTime;
