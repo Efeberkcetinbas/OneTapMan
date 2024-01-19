@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.Burst.Intrinsics;
 
 
 public class DestroyNumber : MonoBehaviour
@@ -12,13 +13,14 @@ public class DestroyNumber : MonoBehaviour
     [SerializeField] private float jumpPower,duration;
     [SerializeField] private int jumpNumber;
 
-    [SerializeField] private GameObject pillow,character;
+    [SerializeField] private GameObject pillow;
     [SerializeField] private GameObject destructionObject;
 
     private Vector3 firstPosition;
 
     [SerializeField] private Transform target;
 
+    //Instantiate et bunu
     [SerializeField] private Window window;
 
 
@@ -31,6 +33,7 @@ public class DestroyNumber : MonoBehaviour
 
     private void Destruction()
     {
+        window.transform.SetParent(null);
         gameObject.SetActive(false);
     }
 
@@ -49,21 +52,26 @@ public class DestroyNumber : MonoBehaviour
                 Destruction();
             });*/
             //destructionClone.transform.localScale=Vector3.zero;
-            destructionClone.transform.DOMove(fromPos.position,.5f).OnComplete(()=>{
-                Sequence sequence=DOTween.Sequence();
-                
-                sequence.Append(destructionClone.transform.DOMove(targetPos.position,duration)
-                    .SetEase(ease))
-                    .Join(destructionClone.transform.DORotate(new Vector3(90,0,0),duration,RotateMode.FastBeyond360));
 
-                
+            // !!!!!!!!!!!!! BU AYARLAR OYNANABILIR. EN UYGUN HISSIYATA KADAR
+            destructionClone.transform.DOMove(fromPos.position,.75f).OnComplete(()=>{
+                destructionClone.transform.DORotate(new Vector3(360,0,0),0.5f,RotateMode.FastBeyond360).OnComplete(()=>{
+                    destructionClone.transform.LookAt(transform.position);
+                    Sequence sequence=DOTween.Sequence();
+                    
+                    //Look at ile yaptir ki sword neresi olursa olsun duzgun baksin Hedefe
+                    sequence.Append(destructionClone.transform.DOMove(targetPos.position,duration)
+                        .SetEase(ease));
 
-                sequence.OnComplete(()=>{
-                    EventManager.Broadcast(GameEvent.OnHitSword);
-                    window.OnHitSword();
-                    Instantiate(destructionParticle,transform.position,Quaternion.identity);
-                    Destroy(destructionClone);
-                    Destruction();
+                    
+
+                    sequence.OnComplete(()=>{
+                        EventManager.Broadcast(GameEvent.OnHitSword);
+                        window.OnHitSword();
+                        Instantiate(destructionParticle,transform.position,Quaternion.identity);
+                        Destroy(destructionClone);
+                        Destruction();
+                    });
                 });
             });
             
@@ -95,7 +103,6 @@ public class DestroyNumber : MonoBehaviour
     {
         transform.position=firstPosition;
         pillow.SetActive(true);
-        character.SetActive(false);
         
     }
 

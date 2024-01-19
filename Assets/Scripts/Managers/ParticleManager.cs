@@ -16,14 +16,14 @@ public class ParticleManager : MonoBehaviour
     private void OnEnable() 
     {
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
-        EventManager.AddHandler(GameEvent.OnHitNumbers,OnHitNumbers);
+        EventManager.AddHandler(GameEvent.OnHitSword,OnHitSword);
         
     }
 
     private void OnDisable() 
     {
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
-        EventManager.RemoveHandler(GameEvent.OnHitNumbers,OnHitNumbers);
+        EventManager.RemoveHandler(GameEvent.OnHitSword,OnHitSword);
     }
 
     private void Start()
@@ -39,7 +39,7 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
-    private void OnHitNumbers()
+    private void OnHitSword()
     {
         index=Random.Range(0,hitParticles.Count);
         hitParticles[index].Play();
