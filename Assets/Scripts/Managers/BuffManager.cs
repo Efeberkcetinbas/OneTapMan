@@ -45,14 +45,12 @@ public class BuffManager : MonoBehaviour
     {
         EventManager.AddHandler(GameEvent.OnStartGame,OnGameStart);
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
-        EventManager.AddHandler(GameEvent.OnOpenBuffPanel,OnOpenBuffPanel);
     }
 
     private void OnDisable() 
     {
         EventManager.RemoveHandler(GameEvent.OnStartGame,OnGameStart);
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
-        EventManager.RemoveHandler(GameEvent.OnOpenBuffPanel,OnOpenBuffPanel);
     }
 
     private void OnNextLevel()
@@ -97,7 +95,6 @@ public class BuffManager : MonoBehaviour
             val=true;
             isBuffused=true;
             gameData.XP-=priceVal;
-            EventManager.Broadcast(GameEvent.OnBoughtBuff);
             playerData.SaveData();
         }
 
@@ -145,8 +142,6 @@ public class BuffManager : MonoBehaviour
     private void DoInfinity()
     {
         isBuffused=true;
-        EventManager.Broadcast(GameEvent.OnInfinity);
-        StartCoroutine(DoReverse(GameEvent.OnCloseInfinity));
 
         //Ekonomi lazim. Buff aldigimizda ucret artmali. 
         //Buff'in baslamasini game is Start eventine bagla
@@ -155,15 +150,11 @@ public class BuffManager : MonoBehaviour
     private void DoPassionVictory()
     {
         isBuffused=true;
-        EventManager.Broadcast(GameEvent.OnPassionVictory);
-        StartCoroutine(DoReverse(GameEvent.OnClosePassionVictory));
     }
 
     private void DoOnePunchMan()
     {
         isBuffused=true;
-        EventManager.Broadcast(GameEvent.OnOnePunchMan);
-        StartCoroutine(DoReverse(GameEvent.OnCloseOnePunchMan));
     }
 
     #endregion
@@ -177,7 +168,7 @@ public class BuffManager : MonoBehaviour
             if(isInfinityOpen) DoOnePunchMan();
             
             buffBar.SetActive(true);
-            EventManager.Broadcast(GameEvent.OnUpdateBuff);
+            //EventManager.Broadcast(GameEvent.OnUpdateBuff);
         }
     }
 

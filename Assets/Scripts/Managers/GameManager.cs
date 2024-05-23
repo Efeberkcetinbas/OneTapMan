@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.AddHandler(GameEvent.OnFail,OnFail);
         EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
-        EventManager.AddHandler(GameEvent.OnChallengerGameOver,OnChallengerGameOver);
 
     }
 
@@ -56,7 +55,6 @@ public class GameManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.RemoveHandler(GameEvent.OnFail,OnFail);
         EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
-        EventManager.RemoveHandler(GameEvent.OnChallengerGameOver,OnChallengerGameOver);
 
     }
 
@@ -65,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         //FindObjectOfType
         gameData.ReqMove=FindObjectOfType<LevelRequirement>().MoveNumber;
-        gameData.NeededNumber=FindObjectOfType<LevelNeededCube>().NeededNumber;
+        //gameData.NeededNumber=FindObjectOfType<LevelNeededCube>().NeededNumber;
         EventManager.Broadcast(GameEvent.OnUIRequirementUpdate);
     }
 
@@ -145,20 +143,8 @@ public class GameManager : MonoBehaviour
         EventManager.Broadcast(GameEvent.OnOpenFail);
     }
 
-    private void CheckHighScore()
-    {
-        if(levelData.challengeIndex>levelData.highScoreChalleIndex)
-        {
-            levelData.highScoreChalleIndex=levelData.challengeIndex;
-            PlayerPrefs.SetInt("challengerHighScore",levelData.highScoreChalleIndex);
-        }
-    }
-
-    private void OnChallengerGameOver()
-    {
-        CheckHighScore();
-    }
-
+    
+   
 
     private void OnNextLevel()
     {

@@ -63,14 +63,11 @@ public class UIManager : MonoBehaviour
         //incremental
         EventManager.AddHandler(GameEvent.OnUpdateIncreaseScore,OnUpdateIncreaseScore);
         EventManager.AddHandler(GameEvent.OnUpdatePressTime,OnUpdatePressTime);
-        EventManager.AddHandler(GameEvent.OnUpdateBuffTime,OnUpdateBuffTime);
         
         //settings
         EventManager.AddHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
 
-        //challenger
-        EventManager.AddHandler(GameEvent.OnUpdateChallenger,OnUpdateChallenger);
-        EventManager.AddHandler(GameEvent.OnChallengerGameOverUI,OnChallengerGameOverUI);
+       
 
     }
     private void OnDisable()
@@ -84,13 +81,9 @@ public class UIManager : MonoBehaviour
         //incremental
         EventManager.RemoveHandler(GameEvent.OnUpdateIncreaseScore,OnUpdateIncreaseScore);
         EventManager.RemoveHandler(GameEvent.OnUpdatePressTime,OnUpdatePressTime);
-        EventManager.RemoveHandler(GameEvent.OnUpdateBuffTime,OnUpdateBuffTime);
         //settings
         EventManager.RemoveHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
 
-        //challenger
-        EventManager.RemoveHandler(GameEvent.OnUpdateChallenger,OnUpdateChallenger);
-        EventManager.RemoveHandler(GameEvent.OnChallengerGameOverUI,OnChallengerGameOverUI);
 
     }
     
@@ -176,21 +169,7 @@ public class UIManager : MonoBehaviour
         //successScore.SetText("+ " +  (levelData.score+gameData.increaseScore).ToString());
     }
 
-    private void OnUpdateChallenger()
-    {
-        stateNumberText.SetText((levelData.challengeIndex+1).ToString() + " / 40 ");
-    }
-
-    private void OnChallengerGameOverUI()
-    {
-        challengeScoreText.SetText("Score: " + (levelData.challengeIndex+1).ToString() + " / 40 ");
-        challengeHighScoreText.SetText("HighScore: " + (levelData.highScoreChalleIndex+1).ToString() + " / 40 ");
-    }
-    private void OnShopBallSelected()
-    {
-        shoppingScore.SetText(levelData.score.ToString());
-    }
-
+ 
 
     
 }

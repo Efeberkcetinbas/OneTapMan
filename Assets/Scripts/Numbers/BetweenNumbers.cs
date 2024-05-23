@@ -11,14 +11,11 @@ public class BetweenNumbers : MonoBehaviour,INumber
 
     [SerializeField] private GameData gameData;
 
-    private DestroyNumber destroyNumber;
 
-    [SerializeField] private Transform target,bullseye;
 
     private void Start()
     {
         OnUpdateNumber();
-        destroyNumber=GetComponent<DestroyNumber>();
     }
 
     private void OnEnable()
@@ -34,19 +31,10 @@ public class BetweenNumbers : MonoBehaviour,INumber
     {
         if(leftNumber<gameData.RoundedTime && gameData.RoundedTime<rightNumber)
         {
-            if(!gameData.isChallengerLevel)
-                EventManager.Broadcast(GameEvent.OnMatchNumber);
-            
-            destroyNumber.CreateDestructionObject(target,bullseye);
+            EventManager.Broadcast(GameEvent.OnMatchNumber);
 
         }
-        else
-        {
-            if(!gameData.isChallengerLevel)
-                return;
-            else
-                EventManager.Broadcast(GameEvent.OnChallengerGameOver);
-        }
+        
 
     }
 

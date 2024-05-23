@@ -51,7 +51,7 @@ public class IncrementalManager : MonoBehaviour
 
     public void IncreaseBuffTime()
     {
-        incrementalData.BuffTimePrice =IncrementalEconomy(incrementalData.BuffTimePrice,GameEvent.OnUpdateBuffTime,3);
+        //incrementalData.BuffTimePrice =IncrementalEconomy(incrementalData.BuffTimePrice,GameEvent.OnUpdateBuffTime,3);
         OnIncrementalOpen();
         gameData.BuffTime+=5;
         incrementalData.SaveDataWithJson();
@@ -72,7 +72,7 @@ public class IncrementalManager : MonoBehaviour
         EventManager.Broadcast(GameEvent.OnUIUpdate);
         EventManager.Broadcast(GameEvent.OnUpdatePressTime);
         EventManager.Broadcast(GameEvent.OnUpdateIncreaseScore);
-        EventManager.Broadcast(GameEvent.OnUpdateBuffTime);
+        //EventManager.Broadcast(GameEvent.OnUpdateBuffTime);
     }
 
     private int IncrementalEconomy(int price, GameEvent gameEvent,int multiplyPrice)

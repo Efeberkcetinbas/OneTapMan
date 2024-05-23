@@ -25,8 +25,6 @@ public class CameraManager : MonoBehaviour
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnHitNumbers,OnHitNumbers);
-        EventManager.AddHandler(GameEvent.OnThrowSword,OnThrowSword);
-        EventManager.AddHandler(GameEvent.OnHitSword,OnHitSword);
 
     }
 
@@ -34,22 +32,12 @@ public class CameraManager : MonoBehaviour
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnHitNumbers,OnHitNumbers);
-        EventManager.RemoveHandler(GameEvent.OnThrowSword,OnThrowSword);
-        EventManager.RemoveHandler(GameEvent.OnHitSword,OnHitSword);
 
     }
 
    
 
-    private void OnShopOpen()
-    {
-        ChangePriority(8);
-    }
-
-    private void OnShopClose()
-    {
-        ChangePriority(11);
-    }
+    
 
 
     private void OnNextLevel()
@@ -57,18 +45,7 @@ public class CameraManager : MonoBehaviour
         ChangeFieldOfView(oldFieldOfView,2);
     }
 
-
    
-    private void OnThrowSword()
-    {
-        ChangeFieldOfViewHit(afterThrow,beforeThrow,0.25f);
-    }
-
-    private void OnHitSword()
-    {
-        Noise(amplitudeGain,frequencyGain,.2f);
-    }
-    
 
     private void OnHitNumbers()
     {

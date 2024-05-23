@@ -16,14 +16,12 @@ public class ParticleManager : MonoBehaviour
     private void OnEnable() 
     {
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
-        EventManager.AddHandler(GameEvent.OnHitSword,OnHitSword);
         
     }
 
     private void OnDisable() 
     {
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
-        EventManager.RemoveHandler(GameEvent.OnHitSword,OnHitSword);
     }
 
     private void Start()

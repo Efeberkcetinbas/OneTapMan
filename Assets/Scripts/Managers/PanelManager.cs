@@ -31,10 +31,7 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject settingsButton;
 
-    [Header("Challenger")]
-    [SerializeField] private List<GameObject> LevelsUI=new List<GameObject>();
-    [SerializeField] private List<GameObject> challengerUI=new List<GameObject>();
-    [SerializeField] private List<Transform> challengerElements=new List<Transform>();
+   
 
 
 
@@ -44,7 +41,6 @@ public class PanelManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
         EventManager.AddHandler(GameEvent.OnOpenFail,OnOpenFail);
         EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
-        EventManager.AddHandler(GameEvent.OnChallengerGameOver,OnChallengerGameOver);
 
     }
 
@@ -55,14 +51,12 @@ public class PanelManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
         EventManager.RemoveHandler(GameEvent.OnOpenFail,OnOpenFail);
         EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
-        EventManager.RemoveHandler(GameEvent.OnChallengerGameOver,OnChallengerGameOver);
 
     }
 
     private void Start() 
     {
         SceneUI(false);
-        DoActive(challengerUI,false);
 
         waitForSeconds1=new WaitForSeconds(2);
         waitForSeconds2=new WaitForSeconds(.5f);
@@ -80,8 +74,7 @@ public class PanelManager : MonoBehaviour
         //EventManager.Broadcast(GameEvent.OnButtonClicked);
         StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>{
             SceneUI(true);
-            DoActive(LevelsUI,true);
-            DoActive(challengerUI,false);
+            
             /*ScoreImage.DOAnchorPosX(ScoreOldX,0.5f);
             StartCoroutine(ScoreMove());*/
             //player.transform.DOMoveY(0.5f,0.5f).OnComplete(()=>playerData.playerCanMove=true);
@@ -93,20 +86,7 @@ public class PanelManager : MonoBehaviour
         });
     }
 
-    public void StartChallengeMode()
-    {
-        StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>{
-            SceneUI(true);
-            DoActive(LevelsUI,false);
-            DoActive(challengerUI,true);
-            gameData.isChallengerLevel=true;
-            EventManager.Broadcast(GameEvent.OnStartChallengeMode);
-            EventManager.Broadcast(GameEvent.OnUpdateChallenger);
-            gameData.isGameEnd=false;
-
-        });
-        
-    }
+   
 
     #region Settings
     public void OpenSettingsPanel()
@@ -181,68 +161,7 @@ public class PanelManager : MonoBehaviour
 
     }
 
-    #region Challenger Section
-    private void OnChallengerGameOver()
-    {
-        gameData.isGameEnd=true;
-        EventManager.Broadcast(GameEvent.OnChallengerGameOverUI);
-        for (int i = 0; i < challengerUI.Count; i++)
-        {
-            challengerUI[i].SetActive(false);
-        }
-        ChallengerPanel.gameObject.SetActive(true);
-        ChallengerPanel.DOAnchorPos(Vector2.zero,0.2f).SetEase(Ease.InOutCubic).OnComplete(()=>{
-            StartCoroutine(ItemsAnimation(challengerElements));
-        });
-        
-    }
-
-    
-
-    public void ReturnHomePage()
-    {
-        gameData.isChallengerLevel=false;
-        CloseChallenger(false);
-        StartPanel.gameObject.SetActive(true);
-        StartPanel.transform.localScale=Vector3.one;
-        StartPanel.DOAnchorPos(Vector2.zero,0.1f);
-
-        StartCoroutine(Blink(Fade.gameObject,Fade));
-        for (int i = 0; i < sceneUI.Length; i++)
-        {
-            sceneUI[i].SetActive(false);
-        }
-        gameData.isGameEnd=false;
-    }
-
-    public void RestartChallenger()
-    {
-        CloseChallenger(true);
-        levelData.challengeIndex=0;
-        EventManager.Broadcast(GameEvent.OnStartChallengeMode);
-        EventManager.Broadcast(GameEvent.OnUpdateChallenger);
-        gameData.isGameEnd=false;
-    }
-
-    private void CloseChallenger(bool val)
-    {
-        ChallengerPanel.DOAnchorPos(new Vector2(2500,0),0.1f).OnComplete(()=>{
-            for (int i = 0; i < challengerElements.Count; i++)
-            {
-                challengerElements[i].transform.localScale=Vector3.zero;
-                
-            }
-            ChallengerPanel.gameObject.SetActive(false);
-         });
-        for (int i = 0; i < challengerUI.Count; i++)
-        {
-            challengerUI[i].SetActive(val);
-        }
-    }
-
-
-    #endregion
-
+   
 
 
    
@@ -353,7 +272,6 @@ public class PanelManager : MonoBehaviour
         StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>StartPanel.gameObject.SetActive(false));
         BuffPanel.gameObject.SetActive(true);
         BuffPanel.DOAnchorPos(Vector2.zero,duration);
-        EventManager.Broadcast(GameEvent.OnOpenBuffPanel);
     }
 
     public void BackToStart(bool isOnCharacter)

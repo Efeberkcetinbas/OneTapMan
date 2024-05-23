@@ -11,13 +11,10 @@ public class LessNumber : MonoBehaviour,INumber
 
     [SerializeField] private GameData gameData;
 
-    private DestroyNumber destroyNumber;
-    [SerializeField] private Transform fromTarget,bullseye;
 
     private void Start()
     {
         OnUpdateNumber();
-        destroyNumber=GetComponent<DestroyNumber>();
     }
 
     private void OnEnable()
@@ -35,16 +32,10 @@ public class LessNumber : MonoBehaviour,INumber
         {
             if(!gameData.isChallengerLevel)
                 EventManager.Broadcast(GameEvent.OnMatchNumber);
-            
-            destroyNumber.CreateDestructionObject(fromTarget,bullseye);
+
+
         }
-        else
-        {
-            if(!gameData.isChallengerLevel)
-                return;
-            else
-                EventManager.Broadcast(GameEvent.OnChallengerGameOver);
-        }
+       
         
     }
 

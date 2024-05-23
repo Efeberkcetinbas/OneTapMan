@@ -34,9 +34,6 @@ public class AudioManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnStartGame,OnStartGame);
         EventManager.AddHandler(GameEvent.OnIncrementalOpen,OnIncrementalOpen);
         EventManager.AddHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
-        EventManager.AddHandler(GameEvent.OnThrowSword,OnThrowSword);
-        EventManager.AddHandler(GameEvent.OnHitSword,OnHitSword);
-        EventManager.AddHandler(GameEvent.OnOpenBuffPanel,OnOpenBuffPanel);
 
     }
     private void OnDisable() 
@@ -53,9 +50,6 @@ public class AudioManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnStartGame,OnStartGame);
         EventManager.RemoveHandler(GameEvent.OnIncrementalOpen,OnIncrementalOpen);
         EventManager.RemoveHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
-        EventManager.RemoveHandler(GameEvent.OnThrowSword,OnThrowSword);
-        EventManager.RemoveHandler(GameEvent.OnHitSword,OnHitSword);
-        EventManager.RemoveHandler(GameEvent.OnOpenBuffPanel,OnOpenBuffPanel);
         
     }
 
@@ -121,20 +115,7 @@ public class AudioManager : MonoBehaviour
         effectSource.PlayOneShot(UISound);
     }
 
-    private void OnOpenBuffPanel()
-    {
-        effectSource.PlayOneShot(UISound);
-    }
-    private void OnThrowSword()
-    {
-        effectSource.PlayOneShot(throwSound);
-    }
-
-    private void OnHitSword()
-    {
-        effectSource.PlayOneShot(swordHitSound);
-    }
-
+   
     private void OnAudioOffOn()
     {
         isSoundOn=!isSoundOn;

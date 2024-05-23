@@ -11,21 +11,8 @@ public enum GameEvent
     OnCharacterChanged,
    
 
-    //Sword
-    OnThrowSword,
-    OnHitSword,
-
-    //Buffs
-    OnInfinity,
-    OnPassionVictory,
-    OnOnePunchMan,
-    OnCloseInfinity,
-    OnClosePassionVictory,
-    OnCloseOnePunchMan,
-    OnOpenBuffPanel,
-    OnBoughtBuff,
-    OnUpdateBuff,
-    OnUpdateBuffTime,
+   
+    
 
     //Settings
     OnAudioOffOn,
@@ -39,15 +26,6 @@ public enum GameEvent
     OnMatchNumber,
     OnHitNumbers,
     OnNumberFall,
-
-    //Challenger
-    OnMatchChallengeNumber,
-    OnUpdateChallenger,
-    OnStartChallengeMode,
-    OnChallengerGameOver,
-    OnChallengerGameOverUI,
-
-
 
 
 
