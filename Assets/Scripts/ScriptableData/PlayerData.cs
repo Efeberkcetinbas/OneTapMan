@@ -10,9 +10,6 @@ public class PlayerData : ScriptableObject
     public int selectedBallIndex;
 
 
-    public bool isInfinity=false;
-    public bool isPassionVictory=false;
-    public bool isOnePunchMan=false;
 
     //Prices
     public int PriceValInfinity;

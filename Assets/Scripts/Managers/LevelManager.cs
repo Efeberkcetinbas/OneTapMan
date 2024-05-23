@@ -29,21 +29,17 @@ public class LevelManager : MonoBehaviour
     
     private void LoadLevel()
     {
+        levelIndex = PlayerPrefs.GetInt("NumberOfLevel");
+        if (levelIndex == levels.Count) levelIndex = 0;
+        PlayerPrefs.SetInt("NumberOfLevel", levelIndex);
+    
 
-        if(!gameData.isChallengerLevel)
+        for (int i = 0; i < levels.Count; i++)
         {
-            levelIndex = PlayerPrefs.GetInt("NumberOfLevel");
-            if (levelIndex == levels.Count) levelIndex = 0;
-            PlayerPrefs.SetInt("NumberOfLevel", levelIndex);
-        
-
-            for (int i = 0; i < levels.Count; i++)
-            {
-                levels[i].SetActive(false);
-            }
-            Debug.Log(levelIndex);
-            levels[levelIndex].SetActive(true);
+            levels[i].SetActive(false);
         }
+        Debug.Log(levelIndex);
+        levels[levelIndex].SetActive(true);
     }
 
     public void LoadNextLevel()

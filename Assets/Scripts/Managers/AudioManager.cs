@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip GameLoop,BuffMusic;
-    public AudioClip successSound,openSuccessSound,HitNumberSound,StopSound,FallSound,OpeningSound,NextLevelSound,
+    public AudioClip successSound,openSuccessSound,StopSound,FallSound,OpeningSound,NextLevelSound,
     UISound,throwSound,swordHitSound;
 
     AudioSource musicSource,effectSource;
@@ -22,7 +22,6 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable() 
     {
-        EventManager.AddHandler(GameEvent.OnHitNumbers,OnHitNumbers);
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.AddHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
         EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
@@ -38,7 +37,6 @@ public class AudioManager : MonoBehaviour
     }
     private void OnDisable() 
     {
-        EventManager.RemoveHandler(GameEvent.OnHitNumbers,OnHitNumbers);
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.RemoveHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
         EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
@@ -57,13 +55,7 @@ public class AudioManager : MonoBehaviour
 
     
 
-    private void OnHitNumbers()
-    {
-        effectSource.PlayOneShot(HitNumberSound);
-    }
-
-    
-
+   
     private void OnSuccess()
     {
         effectSource.PlayOneShot(successSound);

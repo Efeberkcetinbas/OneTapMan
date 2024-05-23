@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI shoppingScore;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI MoveText;
+    [SerializeField] private TextMeshPro OurBowlWeightText;
     
     
 
@@ -35,10 +36,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject soundOff;
     private bool isSoundOn=true;
 
-    [Header("Challenger Level")]
-    [SerializeField] private TextMeshProUGUI stateNumberText;
-    [SerializeField] private TextMeshProUGUI challengeScoreText;
-    [SerializeField] private TextMeshProUGUI challengeHighScoreText;
+    
 
 
 
@@ -67,6 +65,9 @@ public class UIManager : MonoBehaviour
         //settings
         EventManager.AddHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
 
+        //weight
+        EventManager.AddHandler(GameEvent.OnUpdateOurWeightUI,OnUpdateOurWeightUI);
+
        
 
     }
@@ -84,6 +85,8 @@ public class UIManager : MonoBehaviour
         //settings
         EventManager.RemoveHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
 
+        //weight
+        EventManager.RemoveHandler(GameEvent.OnUpdateOurWeightUI,OnUpdateOurWeightUI);
 
     }
     
@@ -167,6 +170,11 @@ public class UIManager : MonoBehaviour
     private void OnOpenSuccess()
     {
         //successScore.SetText("+ " +  (levelData.score+gameData.increaseScore).ToString());
+    }
+
+    private void OnUpdateOurWeightUI()
+    {
+        OurBowlWeightText.SetText(gameData.totalWeightOurBowl.ToString());
     }
 
  

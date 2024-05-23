@@ -24,14 +24,15 @@ public enum GameEvent
     
     //Numbers
     OnMatchNumber,
-    OnHitNumbers,
     OnNumberFall,
+    OnCheckZero,
 
 
 
     //Time
     OnStartTimer,
     OnStopTimer,
+    OnUpdateOurWeightUI,
 
     //Level Properties
     OnUIRequirementUpdate,

@@ -40,10 +40,10 @@ public class GameManager : MonoBehaviour
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
-        EventManager.AddHandler(GameEvent.OnMatchNumber,OnMatchNumber);
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.AddHandler(GameEvent.OnFail,OnFail);
         EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
+        EventManager.AddHandler(GameEvent.OnMatchNumber,OnMatchNumber);
 
     }
 
@@ -51,10 +51,10 @@ public class GameManager : MonoBehaviour
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
-        EventManager.RemoveHandler(GameEvent.OnMatchNumber,OnMatchNumber);
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.RemoveHandler(GameEvent.OnFail,OnFail);
         EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
+        EventManager.RemoveHandler(GameEvent.OnMatchNumber,OnMatchNumber);
 
     }
 
@@ -69,31 +69,16 @@ public class GameManager : MonoBehaviour
 
     private void OnStopTimer()
     {
-        //gameData.ReqMove
-        if(!gameData.isChallengerLevel)
-        {
-            gameData.ReqMove--;
-            EventManager.Broadcast(GameEvent.OnUIRequirementUpdate);
+        gameData.ReqMove--;
+        EventManager.Broadcast(GameEvent.OnUIRequirementUpdate);
 
-            if(gameData.ReqMove>0)
-                return;
-            else
-                StartCoroutine(CheckIfGameEnds());
-        }
-    }
-
-    private void OnMatchNumber()
-    {
-        hitNumber++;
-        if(hitNumber==gameData.NeededNumber)
-        {
-            gameData.isGameEnd=true;
-            StartCoroutine(StartSuccess());
-        }
-            //Debug.Log("SUCCESS");
-        else
+        if(gameData.ReqMove>0)
             return;
+        else
+            EventManager.Broadcast(GameEvent.OnCheckZero);
     }
+
+    
 
     private IEnumerator StartSuccess()
     {
@@ -107,17 +92,7 @@ public class GameManager : MonoBehaviour
         EventManager.Broadcast(GameEvent.OnFail);
     }
 
-    private IEnumerator CheckIfGameEnds()
-    {
-        yield return waitForSeconds;
-        gameData.isGameEnd=true;
-        Debug.Log("HERE CHECK IF GAME END");
-        if(hitNumber==gameData.NeededNumber)
-            StartCoroutine(StartSuccess());
-//            Debug.Log("SUCCESS");
-        else
-            StartCoroutine(StartFail());
-    }
+    
 
     private void OnSuccess()
     {
@@ -143,6 +118,12 @@ public class GameManager : MonoBehaviour
         EventManager.Broadcast(GameEvent.OnOpenFail);
     }
 
+    private void OnMatchNumber()
+    {
+        Debug.Log("SUCCESSSSSSSS");
+        StartCoroutine(OpenSuccessPanel());
+    }
+
     
    
 
@@ -165,12 +146,10 @@ public class GameManager : MonoBehaviour
     void ClearData()
     {
         gameData.isGameEnd=true;
-        gameData.isChallengerLevel=false;
         playerData.playerCanMove=true;
         
-        levelData.challengeIndex=0;
-        levelData.highScoreChalleIndex=PlayerPrefs.GetInt("challengerHighScore");
         hitNumber=0;
+        gameData.totalWeightOurBowl=0;
    
     }
 

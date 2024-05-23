@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface INumber
 {
-    void OnStopTimer();
+    void OnCheckZero();
     void OnUpdateNumber();
 }

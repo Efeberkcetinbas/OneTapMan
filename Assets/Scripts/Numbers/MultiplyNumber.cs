@@ -19,19 +19,18 @@ public class MultiplyNumber : MonoBehaviour,INumber
 
     private void OnEnable()
     {
-        EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.AddHandler(GameEvent.OnCheckZero,OnCheckZero);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.RemoveHandler(GameEvent.OnCheckZero,OnCheckZero);
     }
-    public void OnStopTimer()
+    public void OnCheckZero()
     {
-        if(gameData.RoundedTime%number==0)
+        if(gameData.totalWeightOurBowl%number==0)
         {
-            if(!gameData.isChallengerLevel)
-                EventManager.Broadcast(GameEvent.OnMatchNumber);
+            EventManager.Broadcast(GameEvent.OnMatchNumber);
             
         }
         

@@ -20,19 +20,18 @@ public class OneNumber : MonoBehaviour, INumber
 
     private void OnEnable()
     {
-        EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.AddHandler(GameEvent.OnCheckZero,OnCheckZero);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.RemoveHandler(GameEvent.OnCheckZero,OnCheckZero);
     }
-    public void OnStopTimer()
+    public void OnCheckZero()
     {
-        if(number==gameData.RoundedTime)
+        if(number==gameData.totalWeightOurBowl)
         {
-            if(!gameData.isChallengerLevel)
-                EventManager.Broadcast(GameEvent.OnMatchNumber);
+            EventManager.Broadcast(GameEvent.OnMatchNumber);
            
         }
         

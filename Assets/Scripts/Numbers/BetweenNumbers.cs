@@ -20,16 +20,16 @@ public class BetweenNumbers : MonoBehaviour,INumber
 
     private void OnEnable()
     {
-        EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.AddHandler(GameEvent.OnCheckZero,OnCheckZero);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.RemoveHandler(GameEvent.OnCheckZero,OnCheckZero);
     }
-    public void OnStopTimer()
+    public void OnCheckZero()
     {
-        if(leftNumber<gameData.RoundedTime && gameData.RoundedTime<rightNumber)
+        if(leftNumber<gameData.totalWeightOurBowl && gameData.totalWeightOurBowl<rightNumber)
         {
             EventManager.Broadcast(GameEvent.OnMatchNumber);
 

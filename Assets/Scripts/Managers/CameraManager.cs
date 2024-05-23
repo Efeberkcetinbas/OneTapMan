@@ -24,14 +24,12 @@ public class CameraManager : MonoBehaviour
     private void OnEnable() 
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
-        EventManager.AddHandler(GameEvent.OnHitNumbers,OnHitNumbers);
 
     }
 
     private void OnDisable() 
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
-        EventManager.RemoveHandler(GameEvent.OnHitNumbers,OnHitNumbers);
 
     }
 
@@ -47,11 +45,7 @@ public class CameraManager : MonoBehaviour
 
    
 
-    private void OnHitNumbers()
-    {
-        Noise(amplitudeGain,frequencyGain,shakeTime);
-    }
-   
+
     
 
     private void Start() 

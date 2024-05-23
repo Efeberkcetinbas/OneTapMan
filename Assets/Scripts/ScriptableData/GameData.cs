@@ -8,8 +8,10 @@ public class GameData : ScriptableObject
 {
 
     public int ReqMove;
-    public int NeededNumber;
     public int RoundedTime;
+    public int totalWeightOurBowl;
+
+
     public int XP;
     public int BuffTime;
 
@@ -17,7 +19,6 @@ public class GameData : ScriptableObject
 
     public bool isGameEnd=false;
     public bool isStartTimer=false;
-    public bool isChallengerLevel=false;
 
     public TimerTypes timerTypes;
 }
