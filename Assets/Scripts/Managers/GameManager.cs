@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     [Header("Open/Close")]
     [SerializeField] private GameObject[] open_close;
     
-    //Boss Ball
 
     private WaitForSeconds waitForSeconds;
     private WaitForSeconds waitForSecondsFail;
