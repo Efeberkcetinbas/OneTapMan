@@ -74,7 +74,11 @@ public class GameManager : MonoBehaviour
         if(gameData.ReqMove>0)
             return;
         else
+        {
+            gameData.isGameEnd=true;
             EventManager.Broadcast(GameEvent.OnCheckZero);
+        }
+            
     }
 
     

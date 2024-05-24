@@ -31,6 +31,17 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] private Vector3 spawnAreaMin;
     [SerializeField] private Vector3 spawnAreaMax;
 
+    [Header("JUMP")]
+    [SerializeField] private PlayerMesh playerMesh;
+    [SerializeField] private float jumpPower;
+    [SerializeField] private int jumpNumber;
+    [SerializeField] private float duration;
+    [SerializeField] private Ease ease;
+
+    [Header("DATA")]
+    [SerializeField] private GameData gameData;
+    private int multiplier=1;
+
     private void Awake()
     {
         // Initialize the dictionary
@@ -60,14 +71,29 @@ public class PlayerSpawner : MonoBehaviour
                 Random.Range(spawnAreaMin.z, spawnAreaMax.z)
             );
             
-
             // Instantiate the selected prefab at the spawner's position and rotation
-            Instantiate(prefabToSpawn, randomPosition, transform.rotation);
+            GameObject spawnedObject=Instantiate(prefabToSpawn, randomPosition, transform.rotation);
+            CreateScale();
+            spawnedObject.transform.localScale*=multiplier;
+            //spawnedObject.transform.localScale*=
+            spawnedObject.transform.DOJump(playerMesh.Mouth.position,jumpPower,jumpNumber,duration).SetEase(ease).OnComplete(()=>{
+                EventManager.Broadcast(GameEvent.OnPlayerEat);
+                Destroy(spawnedObject);
+            });
+            
         }
         else
         {
             Debug.LogWarning("No prefabs assigned for the selected spawn type or spawn type is unknown");
         }
+    }
+
+
+    private int CreateScale()
+    {
+        float clampedTime=Mathf.Clamp(gameData.RoundedTime,0,100);
+        multiplier=Mathf.FloorToInt(clampedTime/20)+1;
+        return multiplier;
     }
 
     private void OnEnable()

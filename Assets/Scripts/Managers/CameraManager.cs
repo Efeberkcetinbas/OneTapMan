@@ -15,8 +15,6 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float newFieldOfView;
     [SerializeField] private float oldFieldOfView;
 
-    [SerializeField] private float beforeThrow;
-    [SerializeField] private float afterThrow;
     private CinemachineBasicMultiChannelPerlin noise;
 
     
@@ -24,12 +22,14 @@ public class CameraManager : MonoBehaviour
     private void OnEnable() 
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
+        EventManager.AddHandler(GameEvent.OnPlayerEat,OnPlayerEat);
 
     }
 
     private void OnDisable() 
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
+        EventManager.RemoveHandler(GameEvent.OnPlayerEat,OnPlayerEat);
 
     }
 
@@ -45,7 +45,10 @@ public class CameraManager : MonoBehaviour
 
    
 
-
+    private void OnPlayerEat()
+    {
+        Noise(amplitudeGain,frequencyGain,shakeTime);
+    }
     
 
     private void Start() 
