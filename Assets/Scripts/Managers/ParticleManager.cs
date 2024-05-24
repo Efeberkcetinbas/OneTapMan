@@ -10,23 +10,35 @@ public class ParticleManager : MonoBehaviour
     private int index;
 
     [SerializeField] private GameData gameData;
+    [SerializeField] private ParticleSystem mouthParticle;
+    [SerializeField] private ParticleSystem sizeUpParticle;
 
     private WaitForSeconds waitForSeconds;
 
     private void OnEnable() 
     {
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
+        EventManager.AddHandler(GameEvent.OnPlayerEat,OnPlayerEat);
+        EventManager.AddHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
         
     }
 
     private void OnDisable() 
     {
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
+        EventManager.RemoveHandler(GameEvent.OnPlayerEat,OnPlayerEat);
+        EventManager.AddHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
+
     }
 
     private void Start()
     {
         waitForSeconds=new WaitForSeconds(.5f);
+    }
+
+    private void OnPlayerSizeUp()
+    {
+        sizeUpParticle.Play();
     }
 
     private void OnSuccess()
@@ -37,10 +49,9 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
-    private void OnHitSword()
+    private void OnPlayerEat()
     {
-        index=Random.Range(0,hitParticles.Count);
-        hitParticles[index].Play();
+        mouthParticle.Play();
     }
 
     

@@ -20,6 +20,8 @@ public class OurBowl : MonoBehaviour, IBowl
     [Header("WEIGHT")]
     public float scaledWeight = 1.0f;
     public int multiplier;
+
+    private int tempMultip=1;
     //Camera
     private Camera cam;
 
@@ -44,7 +46,7 @@ public class OurBowl : MonoBehaviour, IBowl
 
     private void OnStopTimer()
     {
-        CalculateWeight();
+        //CalculateWeight();
         XPEffect();
     }
 
@@ -57,7 +59,7 @@ public class OurBowl : MonoBehaviour, IBowl
     }
     private void OnPlayerEat()
     {
-        
+        CalculateWeight();
         CreateScale();
         ScalePlayer(multiplier);
     }
@@ -72,10 +74,20 @@ public class OurBowl : MonoBehaviour, IBowl
      
     private int CreateScale()
     {
+        tempMultip=multiplier;
         float clampedTime=Mathf.Clamp(gameData.totalWeightOurBowl,100,1000);
         scaledWeight=Mathf.FloorToInt(clampedTime/10)+1;
         multiplier=Mathf.FloorToInt(scaledWeight/10);
+        CheckSizeUp();
         return multiplier;
+    }
+
+    private void CheckSizeUp()
+    {
+        if(tempMultip!=multiplier)
+            EventManager.Broadcast(GameEvent.OnPlayerSizeUp);
+        else
+            return;
     }
 
 
@@ -95,6 +107,12 @@ public class OurBowl : MonoBehaviour, IBowl
         Destroy(XP,2);
     }
 
+    private void OnNextLevel()
+    {
+        tempMultip=1;
+        multiplier=1;
+        scaledWeight=1;
+    }
     
 
 

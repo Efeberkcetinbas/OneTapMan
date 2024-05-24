@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     
 
     private WaitForSeconds waitForSeconds;
+    
     private WaitForSeconds waitForSecondsFail;
 
     [SerializeField]private int hitNumber;
@@ -123,8 +124,14 @@ public class GameManager : MonoBehaviour
 
     private void OnMatchNumber()
     {
-        Debug.Log("SUCCESSSSSSSS");
-        StartCoroutine(OpenSuccessPanel());
+        StartCoroutine(CallSuccess());
+    }
+
+    private IEnumerator CallSuccess()
+    {
+        yield return waitForSeconds;
+        EventManager.Broadcast(GameEvent.OnSuccess);
+
     }
 
     
