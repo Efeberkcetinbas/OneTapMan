@@ -34,8 +34,11 @@ public class LessNumber : MonoBehaviour,INumber
 
 
         }
-       
         
+        else
+        {
+            EventManager.Broadcast(GameEvent.OnDisMatchNumber);
+        }
     }
 
     public void OnUpdateNumber()

@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: LevelData
   m_EditorClassIdentifier: 
   IndexOfLevel: 0
-  score: 9
-  challengeIndex: 0
-  highScoreChalleIndex: 7
+  score: 0

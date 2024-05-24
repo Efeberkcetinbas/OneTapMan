@@ -46,7 +46,6 @@ public class UIManager : MonoBehaviour
     public GameData gameData;
     public PlayerData playerData;
     public LevelData levelData;
-    public IncrementalData incrementalData;
 
     
 
@@ -58,9 +57,6 @@ public class UIManager : MonoBehaviour
         
         EventManager.AddHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
 
-        //incremental
-        EventManager.AddHandler(GameEvent.OnUpdateIncreaseScore,OnUpdateIncreaseScore);
-        EventManager.AddHandler(GameEvent.OnUpdatePressTime,OnUpdatePressTime);
         
         //settings
         EventManager.AddHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
@@ -79,9 +75,6 @@ public class UIManager : MonoBehaviour
 
         EventManager.RemoveHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
 
-        //incremental
-        EventManager.RemoveHandler(GameEvent.OnUpdateIncreaseScore,OnUpdateIncreaseScore);
-        EventManager.RemoveHandler(GameEvent.OnUpdatePressTime,OnUpdatePressTime);
         //settings
         EventManager.RemoveHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
 
@@ -115,31 +108,7 @@ public class UIManager : MonoBehaviour
         
     }
 
-    #region Incrementals
     
-    private void OnUpdateIncreaseScore()
-    {
-        increaseScoreIncrementalText.SetText("+ " +  incrementalData.increaseScore.ToString());
-        priceIncreaseScoreIncrementalText.SetText(incrementalData.IncreaseScorePrice.ToString());
-        incrementalScoreText.SetText(levelData.score.ToString());
-        
-    }
-
-    private void OnUpdatePressTime()
-    {
-        pressTimeIncrementalText.SetText(incrementalData.pressTime.ToString());
-        pricePressTimeIncrementalText.SetText(incrementalData.PressTimePrice.ToString());
-        incrementalScoreText.SetText(levelData.score.ToString());
-
-    }
-
-    private void OnUpdateBuffTime()
-    {
-        buffTimeIncrementalText.SetText(gameData.BuffTime.ToString());
-        priceBuffTimeIncrementalText.SetText(incrementalData.BuffTimePrice.ToString());
-        incrementalScoreText.SetText(levelData.score.ToString());
-    }
-    #endregion
 
     
 

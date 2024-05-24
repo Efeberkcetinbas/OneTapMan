@@ -23,6 +23,7 @@ public class CameraManager : MonoBehaviour
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnPlayerEat,OnPlayerEat);
+        EventManager.AddHandler(GameEvent.OnDisMatchNumber,OnDisMatchNumber);
 
     }
 
@@ -30,6 +31,7 @@ public class CameraManager : MonoBehaviour
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnPlayerEat,OnPlayerEat);
+        EventManager.RemoveHandler(GameEvent.OnDisMatchNumber,OnDisMatchNumber);
 
     }
 
@@ -50,6 +52,10 @@ public class CameraManager : MonoBehaviour
         Noise(amplitudeGain,frequencyGain,shakeTime);
     }
     
+    private void OnDisMatchNumber()
+    {
+        Noise(amplitudeGain,frequencyGain,shakeTime);
+    }
 
     private void Start() 
     {

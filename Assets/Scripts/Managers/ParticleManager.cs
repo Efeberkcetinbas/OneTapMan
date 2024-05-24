@@ -12,6 +12,7 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] private GameData gameData;
     [SerializeField] private ParticleSystem mouthParticle;
     [SerializeField] private ParticleSystem sizeUpParticle;
+    [SerializeField] private ParticleSystem sizeUpParticleLight;
 
     private WaitForSeconds waitForSeconds;
 
@@ -20,6 +21,7 @@ public class ParticleManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.AddHandler(GameEvent.OnPlayerEat,OnPlayerEat);
         EventManager.AddHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
+        EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         
     }
 
@@ -27,7 +29,8 @@ public class ParticleManager : MonoBehaviour
     {
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.RemoveHandler(GameEvent.OnPlayerEat,OnPlayerEat);
-        EventManager.AddHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
+        EventManager.RemoveHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
+        EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
 
     }
 
@@ -39,19 +42,41 @@ public class ParticleManager : MonoBehaviour
     private void OnPlayerSizeUp()
     {
         sizeUpParticle.Play();
+        sizeUpParticleLight.Play();
     }
 
     private void OnSuccess()
     {
-        for (int i = 0; i < successParticles.Count; i++)
-        {
-            successParticles[i].Play();
-        }
+        SetParticle(true,successParticles);
     }
 
     private void OnPlayerEat()
     {
         mouthParticle.Play();
+    }
+
+    private void OnNextLevel()
+    {
+        SetParticle(false,successParticles);
+    }
+
+    private void SetParticle(bool val,List<ParticleSystem> particles)
+    {
+        for (int i = 0; i < particles.Count; i++)
+        {
+            if(val)
+            {
+                particles[i].gameObject.SetActive(true);
+                particles[i].Play();
+            }
+                
+            else
+            {
+                particles[i].gameObject.SetActive(false);
+                particles[i].Stop();
+            }
+                
+        }
     }
 
     

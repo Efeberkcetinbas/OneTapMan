@@ -35,12 +35,16 @@ public class OurBowl : MonoBehaviour, IBowl
     {
         EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
         EventManager.AddHandler(GameEvent.OnPlayerEat,OnPlayerEat);
+        EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
+        EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
         EventManager.RemoveHandler(GameEvent.OnPlayerEat,OnPlayerEat);
+        EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
+        EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
 
     }
 
@@ -112,6 +116,13 @@ public class OurBowl : MonoBehaviour, IBowl
         tempMultip=1;
         multiplier=1;
         scaledWeight=1;
+        ScalePlayer(1);
+        
+    }
+
+    private void OnRestartLevel()
+    {
+        OnNextLevel();
     }
     
 

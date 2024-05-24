@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip GameLoop,BuffMusic;
-    public AudioClip successSound,openSuccessSound,StopSound,FallSound,OpeningSound,NextLevelSound,EatSound,SizeUpSound,
+    public AudioClip successSound,openSuccessSound,StopSound,OpeningSound,NextLevelSound,EatSound,SizeUpSound,FailSound,DeadSound,
     UISound,throwSound,swordHitSound;
 
     AudioSource musicSource,effectSource;
@@ -25,7 +25,6 @@ public class AudioManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.AddHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
         EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
-        EventManager.AddHandler(GameEvent.OnNumberFall,OnNumberFall);
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnShopOpen,OnShopOpen);
         EventManager.AddHandler(GameEvent.OnShopClose,OnShopClose);
@@ -34,6 +33,8 @@ public class AudioManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
         EventManager.AddHandler(GameEvent.OnPlayerEat,OnPlayerEat);
         EventManager.AddHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
+        EventManager.AddHandler(GameEvent.OnFail,OnFail);
+        EventManager.AddHandler(GameEvent.OnOpenFail,OnOpenFail);
 
     }
     private void OnDisable() 
@@ -41,7 +42,6 @@ public class AudioManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
         EventManager.RemoveHandler(GameEvent.OnOpenSuccess,OnOpenSuccess);
         EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
-        EventManager.RemoveHandler(GameEvent.OnNumberFall,OnNumberFall);
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnShopOpen,OnShopOpen);
         EventManager.RemoveHandler(GameEvent.OnShopClose,OnShopClose);
@@ -50,6 +50,8 @@ public class AudioManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnAudioOffOn,OnAudioOffOn);
         EventManager.RemoveHandler(GameEvent.OnPlayerEat,OnPlayerEat);
         EventManager.RemoveHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
+        EventManager.RemoveHandler(GameEvent.OnFail,OnFail);
+        EventManager.RemoveHandler(GameEvent.OnOpenFail,OnOpenFail);
         
     }
 
@@ -73,13 +75,18 @@ public class AudioManager : MonoBehaviour
         effectSource.PlayOneShot(StopSound);
     } 
 
-    
-
-
-    private void OnNumberFall()
+    private void OnFail()
     {
-        effectSource.PlayOneShot(FallSound);
+        effectSource.PlayOneShot(DeadSound);
     }
+
+    private void OnOpenFail()
+    {
+        effectSource.PlayOneShot(FailSound);
+    }
+
+
+    
 
     private void OnNextLevel()
     {

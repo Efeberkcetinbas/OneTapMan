@@ -59,6 +59,7 @@ public class ClockManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnStartTimer,OnStartTimer);
         EventManager.AddHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
 
     }
 
@@ -67,6 +68,7 @@ public class ClockManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnStartTimer,OnStartTimer);
         EventManager.RemoveHandler(GameEvent.OnStopTimer,OnStopTimer);
+        EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
 
     }
 
@@ -75,12 +77,19 @@ public class ClockManager : MonoBehaviour
         gameData.Timer=FindObjectOfType<LevelClockTime>().CurrentTime;
         gameData.timerTypes=FindObjectOfType<LevelClockTime>().timerType;
         CheckTimerType();
+        gameData.RoundedTime=0;
+        timerText.SetText(gameData.RoundedTime.ToString());
         /*isStop=true;
         gameData.RoundedTime=0;*/
 
         Debug.Log(multiply);
     }
 
+    private void OnRestartLevel()
+    {
+        gameData.RoundedTime=0;
+        timerText.SetText(gameData.RoundedTime.ToString());
+    }
 
     private void CheckTimerType()
     {

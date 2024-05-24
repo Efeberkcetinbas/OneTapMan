@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     private WaitForSeconds waitForSeconds;
     
     private WaitForSeconds waitForSecondsFail;
+    private WaitForSeconds waitForSecondsCheck;
 
-    [SerializeField]private int hitNumber;
 
     private void Awake() 
     {
@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     
     private void Start() 
     {
+        waitForSecondsCheck=new WaitForSeconds(1);
         waitForSeconds=new WaitForSeconds(1.5f);
         waitForSecondsFail=new WaitForSeconds(.5f);
         UpdateRequirement();
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnFail,OnFail);
         EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
         EventManager.AddHandler(GameEvent.OnMatchNumber,OnMatchNumber);
+        EventManager.AddHandler(GameEvent.OnDisMatchNumber,OnDisMatchNumber);
 
     }
 
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnFail,OnFail);
         EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
         EventManager.RemoveHandler(GameEvent.OnMatchNumber,OnMatchNumber);
+        EventManager.RemoveHandler(GameEvent.OnDisMatchNumber,OnDisMatchNumber);
 
     }
 
@@ -77,9 +80,15 @@ public class GameManager : MonoBehaviour
         else
         {
             gameData.isGameEnd=true;
-            EventManager.Broadcast(GameEvent.OnCheckZero);
+            StartCoroutine(CallCheckZeroEvent());
         }
             
+    }
+
+    private IEnumerator CallCheckZeroEvent()
+    {
+        yield return waitForSecondsCheck;
+        EventManager.Broadcast(GameEvent.OnCheckZero);
     }
 
     
@@ -127,11 +136,22 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CallSuccess());
     }
 
+    private void OnDisMatchNumber()
+    {
+        StartCoroutine(CallFail());
+    }
+
     private IEnumerator CallSuccess()
     {
         yield return waitForSeconds;
         EventManager.Broadcast(GameEvent.OnSuccess);
 
+    }
+
+    private IEnumerator CallFail()
+    {
+        yield return waitForSeconds;
+        EventManager.Broadcast(GameEvent.OnFail);
     }
 
     
@@ -141,13 +161,17 @@ public class GameManager : MonoBehaviour
     {
         ClearData();
         UpdateRequirement();
+        EventManager.Broadcast(GameEvent.OnUpdateOurWeightUI);
+
     }
 
     private void OnRestartLevel()
     {
         gameData.isGameEnd=false;
-        hitNumber=0;
         UpdateRequirement();
+        gameData.totalWeightOurBowl=0;
+        EventManager.Broadcast(GameEvent.OnUpdateOurWeightUI);
+
     }
 
    
@@ -158,7 +182,6 @@ public class GameManager : MonoBehaviour
         gameData.isGameEnd=true;
         playerData.playerCanMove=true;
         
-        hitNumber=0;
         gameData.totalWeightOurBowl=0;
    
     }

@@ -37,7 +37,7 @@ public class ShopCharacterSelection : MonoBehaviour
 
             shopCharacters[selectedIndex].button.image.color=Color.green;
             shopCharacters[selectedIndex].transform.DOScale(Vector3.one*1.2f,0.2f);
-            playerData.selectedBallIndex=selectedIndex;
+            playerData.selectedCharacterIndex=selectedIndex;
             playerData.SaveData();
             EventManager.Broadcast(GameEvent.OnCharacterChanged);
         }

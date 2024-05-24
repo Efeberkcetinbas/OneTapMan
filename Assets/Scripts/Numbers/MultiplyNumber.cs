@@ -34,6 +34,10 @@ public class MultiplyNumber : MonoBehaviour,INumber
             
         }
         
+        else
+        {
+            EventManager.Broadcast(GameEvent.OnDisMatchNumber);
+        }
 
     }
 

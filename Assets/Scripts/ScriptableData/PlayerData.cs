@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerData : ScriptableObject 
 {
     public bool playerCanMove=true;
-    public int selectedBallIndex;
+    public int selectedCharacterIndex;
 
 
 

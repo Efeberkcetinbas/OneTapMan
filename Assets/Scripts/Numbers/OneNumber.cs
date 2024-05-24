@@ -35,6 +35,10 @@ public class OneNumber : MonoBehaviour, INumber
            
         }
         
+        else
+        {
+            EventManager.Broadcast(GameEvent.OnDisMatchNumber);
+        }
 
 
     }

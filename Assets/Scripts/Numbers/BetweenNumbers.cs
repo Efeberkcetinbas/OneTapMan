@@ -30,10 +30,9 @@ public class BetweenNumbers : MonoBehaviour,INumber
     public void OnCheckZero()
     {
         if(leftNumber<gameData.totalWeightOurBowl && gameData.totalWeightOurBowl<rightNumber)
-        {
             EventManager.Broadcast(GameEvent.OnMatchNumber);
-
-        }
+        else
+            EventManager.Broadcast(GameEvent.OnDisMatchNumber);
         
 
     }

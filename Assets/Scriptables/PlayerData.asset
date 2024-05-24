@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerCanMove: 1
+  selectedCharacterIndex: 3
+  PriceValInfinity: 0
+  PriceValPassionVictory: 0
+  PriceValOnePunchMan: 0
