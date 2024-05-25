@@ -24,6 +24,9 @@ public class CameraManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnPlayerEat,OnPlayerEat);
         EventManager.AddHandler(GameEvent.OnDisMatchNumber,OnDisMatchNumber);
+        EventManager.AddHandler(GameEvent.OnShopOpen,OnShopOpen);
+        EventManager.AddHandler(GameEvent.OnShopClose,OnShopClose);
+        
 
     }
 
@@ -32,10 +35,20 @@ public class CameraManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnPlayerEat,OnPlayerEat);
         EventManager.RemoveHandler(GameEvent.OnDisMatchNumber,OnDisMatchNumber);
+        EventManager.RemoveHandler(GameEvent.OnShopOpen,OnShopOpen);
+        EventManager.RemoveHandler(GameEvent.OnShopClose,OnShopClose);
 
     }
 
-   
+    private void OnShopOpen()
+    {
+        ChangeFieldOfView(15,0.5f);
+    }
+
+    private void OnShopClose()
+    {
+        ChangeFieldOfView(55,0.5f);
+    }
 
     
 

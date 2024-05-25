@@ -10,7 +10,6 @@ public class ParticleManager : MonoBehaviour
     private int index;
 
     [SerializeField] private GameData gameData;
-    [SerializeField] private ParticleSystem mouthParticle;
     [SerializeField] private ParticleSystem sizeUpParticle;
     [SerializeField] private ParticleSystem sizeUpParticleLight;
 
@@ -19,7 +18,6 @@ public class ParticleManager : MonoBehaviour
     private void OnEnable() 
     {
         EventManager.AddHandler(GameEvent.OnSuccess,OnSuccess);
-        EventManager.AddHandler(GameEvent.OnPlayerEat,OnPlayerEat);
         EventManager.AddHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         
@@ -28,7 +26,6 @@ public class ParticleManager : MonoBehaviour
     private void OnDisable() 
     {
         EventManager.RemoveHandler(GameEvent.OnSuccess,OnSuccess);
-        EventManager.RemoveHandler(GameEvent.OnPlayerEat,OnPlayerEat);
         EventManager.RemoveHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
 
@@ -50,10 +47,7 @@ public class ParticleManager : MonoBehaviour
         SetParticle(true,successParticles);
     }
 
-    private void OnPlayerEat()
-    {
-        mouthParticle.Play();
-    }
+    
 
     private void OnNextLevel()
     {

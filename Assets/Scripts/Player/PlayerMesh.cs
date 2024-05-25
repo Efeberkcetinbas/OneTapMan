@@ -12,6 +12,9 @@ public class PlayerMesh : MonoBehaviour
     public Transform Mouth;
 
     [SerializeField] private ParticleSystem destroyParticle;
+    [SerializeField] private List<ParticleSystem> mouthParticle=new List<ParticleSystem>();
+    [SerializeField] private Color mouthParticleColor;
+
 
     
 
@@ -20,6 +23,8 @@ public class PlayerMesh : MonoBehaviour
     {
         EventManager.AddHandler(GameEvent.OnFail,OnFail);
         EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
+        EventManager.AddHandler(GameEvent.OnPlayerEat,OnPlayerEat);
+
 
     }
 
@@ -27,6 +32,8 @@ public class PlayerMesh : MonoBehaviour
     {
         EventManager.RemoveHandler(GameEvent.OnFail,OnFail);
         EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
+        EventManager.RemoveHandler(GameEvent.OnPlayerEat,OnPlayerEat);
+
     }
 
 
@@ -41,6 +48,11 @@ public class PlayerMesh : MonoBehaviour
         destroyParticle.Play();
     }
 
+    private void OnPlayerEat()
+    {
+        PlayParticles(mouthParticleColor);
+    }
+
 
     private void OnRestartLevel()
     {
@@ -51,6 +63,31 @@ public class PlayerMesh : MonoBehaviour
 
         characters[playerData.selectedCharacterIndex].gameObject.SetActive(true);
     }
+
+    internal void PlayParticles(Color color)
+    {
+        for (int i = 0; i < mouthParticle.Count; i++)
+        {
+            
+            SetParticleSystemColor(mouthParticle[i],color);
+            ParticleSystem[] childParticles = mouthParticle[i].GetComponentsInChildren<ParticleSystem>();
+            for (int j = 0; j < childParticles.Length; j++)
+            {
+                SetParticleSystemColor(childParticles[j], color);
+            }
+        }
+
+        mouthParticle[0].Play();
+    }
+
+
+    //Particle Color
+    private void SetParticleSystemColor(ParticleSystem particleSystem, Color color)
+    {
+        var main = particleSystem.main;
+        main.startColor = color;
+    }
+
     
 
     
