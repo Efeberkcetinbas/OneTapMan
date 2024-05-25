@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     
 
     private WaitForSeconds waitForSeconds;
+    private WaitForSeconds waitForSecondsForPanel;
     
-    private WaitForSeconds waitForSecondsFail;
     private WaitForSeconds waitForSecondsCheck;
 
 
@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
     private void Start() 
     {
         waitForSecondsCheck=new WaitForSeconds(1);
-        waitForSeconds=new WaitForSeconds(1.5f);
-        waitForSecondsFail=new WaitForSeconds(.5f);
+        waitForSeconds=new WaitForSeconds(0.75f);
+        waitForSecondsForPanel=new WaitForSeconds(1);
         UpdateRequirement();
     }
 
@@ -93,20 +93,6 @@ public class GameManager : MonoBehaviour
 
     
 
-    private IEnumerator StartSuccess()
-    {
-        yield return waitForSeconds;
-        EventManager.Broadcast(GameEvent.OnSuccess);
-    }
-
-    private IEnumerator StartFail()
-    {
-        yield return waitForSecondsFail;
-        EventManager.Broadcast(GameEvent.OnFail);
-    }
-
-    
-
     private void OnSuccess()
     {
         gameData.isGameEnd=true;
@@ -121,13 +107,13 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator OpenSuccessPanel()
     {
-        yield return waitForSeconds;
+        yield return waitForSecondsForPanel;
         EventManager.Broadcast(GameEvent.OnOpenSuccess);
     }
 
     private IEnumerator OpenFailPanel()
     {
-        yield return waitForSeconds;
+        yield return waitForSecondsForPanel;
         EventManager.Broadcast(GameEvent.OnOpenFail);
     }
 

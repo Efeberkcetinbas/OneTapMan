@@ -35,6 +35,7 @@ public class AudioManager : MonoBehaviour
         EventManager.AddHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
         EventManager.AddHandler(GameEvent.OnFail,OnFail);
         EventManager.AddHandler(GameEvent.OnOpenFail,OnOpenFail);
+        EventManager.AddHandler(GameEvent.OnRestartLevel,OnStartGame);
 
     }
     private void OnDisable() 
@@ -52,6 +53,7 @@ public class AudioManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnPlayerSizeUp,OnPlayerSizeUp);
         EventManager.RemoveHandler(GameEvent.OnFail,OnFail);
         EventManager.RemoveHandler(GameEvent.OnOpenFail,OnOpenFail);
+        EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnStartGame);
         
     }
 

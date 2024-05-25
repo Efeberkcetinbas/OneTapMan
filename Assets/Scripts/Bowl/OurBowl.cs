@@ -71,8 +71,24 @@ public class OurBowl : MonoBehaviour, IBowl
     
     public void CalculateWeight()
     {
-        gameData.totalWeightOurBowl+=gameData.RoundedTime;
+        DOTween.To(GetWeight,ChangeWeight,gameData.totalWeightOurBowl+gameData.RoundedTime,0.25f).OnUpdate(UpdateWeightUI);
+        /*gameData.totalWeightOurBowl+=gameData.RoundedTime;
+        EventManager.Broadcast(GameEvent.OnUpdateOurWeightUI);*/
+    }
+
+    private void UpdateWeightUI()
+    {
         EventManager.Broadcast(GameEvent.OnUpdateOurWeightUI);
+    }
+
+    private void ChangeWeight(int value)
+    {
+        gameData.totalWeightOurBowl=value;
+    }
+
+    private int GetWeight()
+    {
+        return gameData.totalWeightOurBowl;
     }
 
      

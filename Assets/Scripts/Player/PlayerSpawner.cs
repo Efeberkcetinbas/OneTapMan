@@ -75,8 +75,9 @@ public class PlayerSpawner : MonoBehaviour
             GameObject spawnedObject=Instantiate(prefabToSpawn, randomPosition, transform.rotation);
             CreateScale();
             spawnedObject.transform.localScale*=multiplier;
-            //spawnedObject.transform.localScale*=
-            spawnedObject.transform.DOJump(playerMesh.Mouth.position,jumpPower,jumpNumber,duration).SetEase(ease).OnComplete(()=>{
+            
+            spawnedObject.transform.DOLocalRotate(new Vector3(-360,0,0),duration,RotateMode.FastBeyond360).SetRelative(true).SetEase(ease);
+            spawnedObject.transform.DOJump(playerMesh.Mouth.position,jumpPower,jumpNumber,duration).OnComplete(()=>{
                 EventManager.Broadcast(GameEvent.OnPlayerEat);
                 Destroy(spawnedObject);
             });
