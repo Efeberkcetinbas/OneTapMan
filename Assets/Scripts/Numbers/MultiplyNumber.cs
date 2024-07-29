@@ -41,6 +41,17 @@ public class MultiplyNumber : MonoBehaviour,INumber
 
     }
 
+    private void OnCheck()
+    {
+        if(gameData.totalWeightOurBowl%number==0)
+        {
+            EventManager.Broadcast(GameEvent.OnMatchNumber);
+            
+        }
+
+        else return ;
+    }
+
     public void OnUpdateNumber()
     {
         numberText.SetText(" x " + number.ToString());

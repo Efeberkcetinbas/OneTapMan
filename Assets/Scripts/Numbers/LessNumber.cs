@@ -41,6 +41,20 @@ public class LessNumber : MonoBehaviour,INumber
         }
     }
 
+    private void OnCheck()
+    {
+        if(number>gameData.totalWeightOurBowl)
+        {
+            EventManager.Broadcast(GameEvent.OnMatchNumber);
+
+        }
+
+        else
+        {
+            return;
+        }
+    }
+
     public void OnUpdateNumber()
     {
         numberText.SetText("< " + number.ToString());

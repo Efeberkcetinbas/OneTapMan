@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
+using Unity.Mathematics;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI MoveText;
     [SerializeField] private TextMeshPro OurBowlWeightText;
+
+    [Header("Bar")]
+    [SerializeField] private Image progressBar;
+    
     
     
 
@@ -134,6 +139,14 @@ public class UIManager : MonoBehaviour
     {
         //RequirementNumber
         MoveText.SetText(gameData.ReqMove.ToString());
+        /*
+        float val=ballData.ballsPassTime/3;
+        counterProgressBar.DOFillAmount(val,0.25f);
+
+        */
+
+        float val=((float)gameData.ReqMove/gameData.tempMove);
+        progressBar.DOFillAmount(val,0.25f);
     }
 
     private void OnOpenSuccess()
@@ -146,6 +159,8 @@ public class UIManager : MonoBehaviour
         OurBowlWeightText.SetText(gameData.totalWeightOurBowl.ToString());
     }
 
+
+   
  
 
     

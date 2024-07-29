@@ -43,7 +43,12 @@ public class Player : MonoBehaviour
         }
             
         else
+        {
             EventManager.Broadcast(GameEvent.OnStopTimer);
+            //EventManager.Broadcast(GameEvent.OnCheck);
+
+        }
+            
     }
 
     

@@ -7,7 +7,9 @@ using UnityEngine;
 public class GameData : ScriptableObject 
 {
 
+
     public int ReqMove;
+    public int tempMove;
     public int RoundedTime;
     public int totalWeightOurBowl;
     public int increaseScore;

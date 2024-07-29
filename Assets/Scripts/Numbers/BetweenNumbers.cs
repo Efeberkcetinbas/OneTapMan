@@ -37,6 +37,13 @@ public class BetweenNumbers : MonoBehaviour,INumber
 
     }
 
+    private void OnCheck()
+    {
+        if(leftNumber<gameData.totalWeightOurBowl && gameData.totalWeightOurBowl<rightNumber)
+            EventManager.Broadcast(GameEvent.OnMatchNumber);
+        else return;
+
+    }
     public void OnUpdateNumber()
     {
         numberText.SetText(leftNumber.ToString() + " - " + rightNumber.ToString());

@@ -95,7 +95,7 @@ public class OurBowl : MonoBehaviour, IBowl
     private int CreateScale()
     {
         tempMultip=multiplier;
-        float clampedTime=Mathf.Clamp(gameData.totalWeightOurBowl,100,1000);
+        float clampedTime=Mathf.Clamp(gameData.totalWeightOurBowl+gameData.RoundedTime,100,1000);
         scaledWeight=Mathf.FloorToInt(clampedTime/10)+1;
         multiplier=Mathf.FloorToInt(scaledWeight/10);
         CheckSizeUp();

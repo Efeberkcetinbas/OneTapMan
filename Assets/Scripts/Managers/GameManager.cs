@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     {
         //FindObjectOfType
         gameData.ReqMove=FindObjectOfType<LevelRequirement>().MoveNumber;
+        gameData.tempMove=gameData.ReqMove;
         //gameData.NeededNumber=FindObjectOfType<LevelNeededCube>().NeededNumber;
         EventManager.Broadcast(GameEvent.OnUIRequirementUpdate);
     }

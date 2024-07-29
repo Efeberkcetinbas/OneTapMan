@@ -149,15 +149,25 @@ public class PanelManager : MonoBehaviour
             SuccessPanel.gameObject.SetActive(false);
         });
         
-        StartPanel.gameObject.SetActive(true);
-        StartPanel.transform.localScale=Vector3.one;
-        StartPanel.DOAnchorPos(Vector2.zero,0.1f);
+        // START PANEL NEXT LEVELDE KAPATILINCA
 
+        /*StartPanel.gameObject.SetActive(true);
+        StartPanel.transform.localScale=Vector3.one;
+        StartPanel.DOAnchorPos(Vector2.zero,0.1f);*/
+
+        
         StartCoroutine(Blink(Fade.gameObject,Fade));
-        for (int i = 0; i < sceneUI.Length; i++)
+        
+        // START PANEL NEXT LEVELDE KAPATILINCA
+        /*for (int i = 0; i < sceneUI.Length; i++)
         {
             sceneUI[i].SetActive(false);
-        }
+        }*/
+
+        SceneUI(true);
+        EventManager.Broadcast(GameEvent.OnStartGame);
+        gameData.isGameEnd=false;
+
 
     }
 
@@ -254,6 +264,10 @@ public class PanelManager : MonoBehaviour
     public void OpenCharacterPanel()
     {
         StartPanel.DOAnchorPos(new Vector2(StartX,StartY),duration).OnComplete(()=>StartPanel.gameObject.SetActive(false));
+        for (int i = 0; i < sceneUI.Length; i++)
+        {
+            sceneUI[i].SetActive(false);
+        }
         CharacterPanel.gameObject.SetActive(true);
         CharacterPanel.DOAnchorPos(new Vector2(0,0),duration);
         EventManager.Broadcast(GameEvent.OnShopOpen);
@@ -289,6 +303,11 @@ public class PanelManager : MonoBehaviour
             StartPanel.DOAnchorPos(Vector2.zero,duration);
             IncrementalPanel.DOAnchorPos(new Vector2(IncrementalX,IncrementalY),duration);
             EventManager.Broadcast(GameEvent.OnShopClose);
+        }
+
+        for (int i = 0; i < sceneUI.Length; i++)
+        {
+            sceneUI[i].SetActive(true);
         }
     }
 

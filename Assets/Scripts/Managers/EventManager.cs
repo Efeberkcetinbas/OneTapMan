@@ -27,6 +27,7 @@ public enum GameEvent
     OnDisMatchNumber,
     OnNumberFall,
     OnCheckZero,
+    OnCheck,
     OnPlayerEat,
     OnPlayerSizeUp,
 

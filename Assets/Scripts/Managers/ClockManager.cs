@@ -77,6 +77,7 @@ public class ClockManager : MonoBehaviour
         gameData.Timer=FindObjectOfType<LevelClockTime>().CurrentTime;
         gameData.timerTypes=FindObjectOfType<LevelClockTime>().timerType;
         CheckTimerType();
+        cTime=0;
         gameData.RoundedTime=0;
         timerText.SetText(gameData.RoundedTime.ToString());
         /*isStop=true;
