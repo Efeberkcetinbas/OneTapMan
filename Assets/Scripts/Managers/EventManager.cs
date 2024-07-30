@@ -31,6 +31,9 @@ public enum GameEvent
     OnPlayerEat,
     OnPlayerSizeUp,
 
+    //Ads
+    OnRewardedAward,
+
 
 
     //Time
