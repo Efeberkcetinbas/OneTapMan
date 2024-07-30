@@ -16,7 +16,8 @@ public class LevelManager : MonoBehaviour
 
     private void Awake() 
     {
-        levelData.LoadDataWithJson();
+        //levelData.LoadDataWithJson();
+        levelData.LoadDataWithPrefs();
         LoadLevel();
         waitForSeconds=new WaitForSeconds(.5f);
     }
@@ -47,8 +48,11 @@ public class LevelManager : MonoBehaviour
         levelData.IndexOfLevel++;
         LoadLevel();
         EventManager.Broadcast(GameEvent.OnNextLevel);
-        levelData.SaveDataWithJson();
+        //levelData.SaveDataWithJson();
+        levelData.SaveDataWithPrefs();
     }
+
+    
     
     public void RestartLevel()
     {

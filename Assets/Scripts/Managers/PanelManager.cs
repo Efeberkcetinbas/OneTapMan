@@ -157,18 +157,24 @@ public class PanelManager : MonoBehaviour
 
         
         StartCoroutine(Blink(Fade.gameObject,Fade));
-        
+
         // START PANEL NEXT LEVELDE KAPATILINCA
         /*for (int i = 0; i < sceneUI.Length; i++)
         {
             sceneUI[i].SetActive(false);
         }*/
 
+        StartCoroutine(CallStart());
+
+
+    }
+
+    private IEnumerator CallStart()
+    {
+        yield return waitForSeconds2;
         SceneUI(true);
         EventManager.Broadcast(GameEvent.OnStartGame);
         gameData.isGameEnd=false;
-
-
     }
 
    
