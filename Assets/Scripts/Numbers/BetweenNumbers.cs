@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class BetweenNumbers : MonoBehaviour,INumber
 {
@@ -11,8 +12,9 @@ public class BetweenNumbers : MonoBehaviour,INumber
     [SerializeField] private int leftNumber,rightNumber;
 
     [SerializeField] private GameData gameData;
+    [SerializeField] private Transform elevator1,elevator2,elevator3;
 
-
+    [SerializeField] private Ease ease;
 
     private void Start()
     {
@@ -30,6 +32,9 @@ public class BetweenNumbers : MonoBehaviour,INumber
     }
     public void OnCheckZero()
     {
+        CheckLeft();
+        CheckRight();
+
         if(leftNumber<gameData.totalWeightOurBowl && gameData.totalWeightOurBowl<rightNumber)
             EventManager.Broadcast(GameEvent.OnMatchNumber);
         else
@@ -45,5 +50,35 @@ public class BetweenNumbers : MonoBehaviour,INumber
         numberText2.SetText(rightNumber.ToString());
     }
 
+    private void CheckLeft()
+    {
+        if(leftNumber>gameData.totalWeightOurBowl)
+        {
+            elevator1.transform.DOMoveY(elevator1.transform.position.y-2,1f).SetEase(ease);;
+            
+        }
+        
+        else
+        {
+            elevator1.transform.DOMoveY(elevator1.transform.position.y+2,1f).SetEase(ease);;
+        }
+
+
+        
+    }
+
+    private void CheckRight()
+    {
+        if(rightNumber>gameData.totalWeightOurBowl)
+        {
+            elevator2.transform.DOMoveY(elevator1.transform.position.y-2,1f).SetEase(ease);;
+        }
+        
+        else
+        {
+            elevator2.transform.DOMoveY(elevator1.transform.position.y+2,1f).SetEase(ease);;
+        }
+    }
+   
     
 }

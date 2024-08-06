@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LevelRequirement : MonoBehaviour
 {
@@ -9,6 +10,6 @@ public class LevelRequirement : MonoBehaviour
     public Transform spawnPosition1;
     public Transform spawnPosition2;
    
-
+   
     
 }

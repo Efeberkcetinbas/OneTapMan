@@ -111,6 +111,7 @@ public class UIManager : MonoBehaviour
         
         levelText.SetText("LEVEL " + (levelData.IndexOfLevel+1).ToString());
         
+        
     }
 
     
