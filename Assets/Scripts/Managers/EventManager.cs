@@ -34,6 +34,8 @@ public enum GameEvent
     //Ads
     OnRewardedAward,
 
+    //Balls
+    OnSpawnBall,
 
 
     //Time

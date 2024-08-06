@@ -5,7 +5,8 @@ using TMPro;
 
 public class BetweenNumbers : MonoBehaviour,INumber
 {
-    [SerializeField] private TextMeshPro numberText;
+    [SerializeField] private TextMeshPro numberText1;
+    [SerializeField] private TextMeshPro numberText2;
 
     [SerializeField] private int leftNumber,rightNumber;
 
@@ -37,16 +38,11 @@ public class BetweenNumbers : MonoBehaviour,INumber
 
     }
 
-    private void OnCheck()
-    {
-        if(leftNumber<gameData.totalWeightOurBowl && gameData.totalWeightOurBowl<rightNumber)
-            EventManager.Broadcast(GameEvent.OnMatchNumber);
-        else return;
-
-    }
+    
     public void OnUpdateNumber()
     {
-        numberText.SetText(leftNumber.ToString() + " - " + rightNumber.ToString());
+        numberText1.SetText(leftNumber.ToString());
+        numberText2.SetText(rightNumber.ToString());
     }
 
     
