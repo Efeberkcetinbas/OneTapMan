@@ -48,8 +48,17 @@ public class ObjectPool : MonoBehaviour
         return newObj;
     }
 
-    public void ReturnToPool(GameObject obj)
+    public void ReturnToPool()
     {
-        obj.SetActive(false);
+        foreach (GameObject obj in pool)
+        {
+            if (obj.activeInHierarchy)
+            {
+                obj.SetActive(false);
+                obj.transform.position = Vector3.zero; // Reset the position, or any other default position
+            }
+        }
     }
+
+    
 }

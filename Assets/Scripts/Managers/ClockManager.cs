@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using DG.Tweening;
+using UnityEngine.UI;
 
 //Enum ile timer type yap ilk leveller basit yavasca artarken ilerki levellerde hizla arttir.
 public enum TimerTypes
@@ -17,6 +18,8 @@ public class ClockManager : MonoBehaviour
     [SerializeField] private GameData gameData;
 
     private bool isStop;
+
+    public Image progressBarFill; 
 
     //Timer
     [Header("TIME")]
@@ -49,6 +52,12 @@ public class ClockManager : MonoBehaviour
             {
                 cTime=0;
             }
+
+            float fillAmount = Mathf.Clamp01(cTime / 100f);
+            progressBarFill.fillAmount = fillAmount;
+
+            // Update the color based on the progress
+            progressBarFill.color = GetColorForProgress(fillAmount);
             
         }
         
@@ -80,6 +89,7 @@ public class ClockManager : MonoBehaviour
         cTime=0;
         gameData.RoundedTime=0;
         timerText.SetText(gameData.RoundedTime.ToString());
+        progressBarFill.fillAmount=0;
         /*isStop=true;
         gameData.RoundedTime=0;*/
 
@@ -122,5 +132,30 @@ public class ClockManager : MonoBehaviour
     private void ScaleUP()
     {
         timerText.transform.DOScale(Vector3.one*1.5f,.25f).OnComplete(()=>timerText.transform.DOScale(Vector3.one,.25f));
+    }
+
+    private Color GetColorForProgress(float progress)
+    {
+        // Define the colors
+        Color green = Color.green;
+        Color yellow = Color.yellow;
+        Color orange = new Color(1f, 0.5f, 0f); // Orange
+        Color red = Color.red;
+
+        if (progress < 0.33f)
+        {
+            // From Green to Yellow (0% - 33%)
+            return Color.Lerp(green, yellow, progress / 0.33f);
+        }
+        else if (progress < 0.66f)
+        {
+            // From Yellow to Orange (33% - 66%)
+            return Color.Lerp(yellow, orange, (progress - 0.33f) / 0.33f);
+        }
+        else
+        {
+            // From Orange to Red (66% - 100%)
+            return Color.Lerp(orange, red, (progress - 0.66f) / 0.34f);
+        }
     }
 }

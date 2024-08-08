@@ -12,7 +12,7 @@ public class LessNumber : MonoBehaviour,INumber
 
     [SerializeField] private GameData gameData;
 
-    [SerializeField] private Transform elevator1,elevator2;
+    [SerializeField] private Transform glassElevator,otherElevator;
 
     [SerializeField] private Ease ease;
 
@@ -52,21 +52,22 @@ public class LessNumber : MonoBehaviour,INumber
     public void OnUpdateNumber()
     {
         numberText.SetText(number.ToString());
+        
     }
 
     private void CheckScale()
     {
         if(number>gameData.totalWeightOurBowl)
         {
-            elevator1.transform.DOMoveY(elevator1.transform.position.y+2,1f).SetEase(ease);
-            elevator2.transform.DOMoveY(elevator2.transform.position.y-2,1f).SetEase(ease);;
+            glassElevator.transform.DOMoveY(glassElevator.transform.position.y+2,1f);
+            otherElevator.transform.DOMoveY(otherElevator.transform.position.y-2,1f).SetEase(ease);;
 
         }
         
         else
         {
-            elevator1.transform.DOMoveY(elevator1.transform.position.y-2,1f).SetEase(ease);;
-            elevator2.transform.DOMoveY(elevator2.transform.position.y+2,1f).SetEase(ease);;
+            glassElevator.transform.DOMoveY(glassElevator.transform.position.y-2,1f);
+            otherElevator.transform.DOMoveY(otherElevator.transform.position.y+2,1f).SetEase(ease);;
 
         }
     }

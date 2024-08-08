@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BallTrigger : Obstacleable
 {
+    private bool isExploded=false;
+
+    //[SerializeField] private ParticleSystem particle;
+    
     public BallTrigger()
     {
         interactionTag="Killer";
@@ -11,6 +15,13 @@ public class BallTrigger : Obstacleable
 
     internal override void DoAction(TriggerControl player)
     {
-        Debug.Log("EXPLODE");
+        if(!isExploded)
+        {
+            Debug.Log("EXPLODE");
+            //particle.Play();
+            //gameObject.SetActive(false);
+            isExploded=true;
+        }
+        
     }
 }

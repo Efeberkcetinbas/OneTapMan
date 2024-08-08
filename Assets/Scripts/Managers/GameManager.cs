@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         //FindObjectOfType
         gameData.ReqMove=FindObjectOfType<LevelRequirement>().MoveNumber;
         gameData.tempMove=gameData.ReqMove;
+        
         //gameData.NeededNumber=FindObjectOfType<LevelNeededCube>().NeededNumber;
         EventManager.Broadcast(GameEvent.OnUIRequirementUpdate);
     }
@@ -148,6 +149,7 @@ public class GameManager : MonoBehaviour
     {
         ClearData();
         UpdateRequirement();
+        ObjectPool.Instance.ReturnToPool();
         EventManager.Broadcast(GameEvent.OnUpdateOurWeightUI);
 
     }

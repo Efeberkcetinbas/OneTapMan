@@ -12,7 +12,7 @@ public class BetweenNumbers : MonoBehaviour,INumber
     [SerializeField] private int leftNumber,rightNumber;
 
     [SerializeField] private GameData gameData;
-    [SerializeField] private Transform elevator1,elevator2,elevator3;
+    [SerializeField] private Transform elevator1,elevator2;
 
     [SerializeField] private Ease ease;
 
